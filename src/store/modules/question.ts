@@ -3,7 +3,9 @@ import {
     getQuestionTypes, //考试类型
     getQuestionsType, //题目类型
     getQuestionSubject, //课题
-    getQuestionExam //试题列表
+    getQuestionExam, //试题列表 详情数据
+    getAddexam, //添加试卷
+    getWaitexam //待批班级列表
 } from '../../service/index'
 
 class Question {
@@ -25,6 +27,16 @@ class Question {
 
     @action async getQuestionTypes(params: any): Promise<any> {
         let result: any = await getQuestionTypes(params)
+        return result
+    }
+
+    @action async getAddexam(params: any): Promise<any> {
+        let result: any = await getAddexam(params)
+        return result
+    }
+
+    @action async getWaitexam(params: any): Promise<any> {
+        let result: any = await getWaitexam(params)
         return result
     }
 }

@@ -25,3 +25,20 @@ export let getQuestionExam = (params: object) => {
         params
     })
 }
+
+//添加试卷
+export let getAddexam = (params: object) => {
+    const url = '/exam/questions'
+    return request.get(url, {
+        params
+    })
+}
+
+
+//待批班级的列表
+export let getWaitexam = (params: object) => {
+    const url = '/exam/exam'
+    return request.get(url, {
+        params
+    })
+}

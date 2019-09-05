@@ -41,7 +41,7 @@ class CheckTextQuestion extends React.Component<Props> {
         let resultList = await getQuestionExam()
         let typeList = await getQuestionsType()
         let examList = await getQuestionTypes()
-
+        console.log(result.data)
         this.setState({
             topList: result.data,
             examQuestion: resultList.data,
@@ -52,7 +52,7 @@ class CheckTextQuestion extends React.Component<Props> {
     public render() {
         return (
             <div>
-                <h1>查看试题</h1>
+                <h1 style={{ fontSize: '18px', margin: '0 0 10px 0' }}>查看试题</h1>
                 <div className="ant-top">
                     <div className="row">
                         <div className="row1" style={{ fontSize: '13px' }}>
@@ -145,8 +145,8 @@ class CheckTextQuestion extends React.Component<Props> {
                                         key={index}
                                         onClick={() => {
                                             this.props.history.replace(
-                                                '/home/detail?' +
-                                                    item.questions_type_id
+                                                `/home/detail?id=${item.questions_id}`,
+                                                { id: item.questions_id }
                                             )
                                             console.log(this.props)
                                         }}>
