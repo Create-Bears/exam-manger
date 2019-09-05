@@ -1,107 +1,209 @@
-import * as React from 'react';
-import { inject, observer } from 'mobx-react';
-import './index.css';
-import { Layout, Select, Button } from 'antd';
-const { Option } = Select;
+import * as React from 'react'
+import { inject, observer } from 'mobx-react'
+import './index.css'
+import { Layout, Select, Button } from 'antd'
+const { Option, OptGroup } = Select
 
 interface Props {
-	question: any;
+    question: any
+    history: any
 }
 
 @inject('question')
 @observer
 class CheckTextQuestion extends React.Component<Props> {
-	constructor(props: Props) {
-		super(props);
-	}
-	state = {
+    constructor(props: Props) {
+        super(props)
+    }
+    state = {
         topList: [],
-        examQuestion:[],
-	};
-	componentDidMount() {
-		this.getList();
-	}
-	getList = async () => {
-		const { getQuestionSubject ,getQuestionExam} = this.props.question;
-		let result = await getQuestionSubject();
-        let resultList = await getQuestionExam();
-        console.log(resultList)
-		this.setState({
+        examQuestion: [],
+        examType: [],
+        titleType: [],
+        current: 0
+    }
+    clicks(ind: any) {
+        this.setState({
+            current: ind
+        })
+    }
+    componentDidMount() {
+        this.getList()
+    }
+    getList = async () => {
+        const {
+            getQuestionSubject,
+            getQuestionExam,
+            getQuestionsType,
+            getQuestionTypes
+        } = this.props.question
+        let result = await getQuestionSubject()
+        let resultList = await getQuestionExam()
+        let typeList = await getQuestionsType()
+        let examList = await getQuestionTypes()
+
+        this.setState({
             topList: result.data,
-            examQuestion:resultList.data
-		});
-	};
-	public render() {
-		return (
-			<div>
-				<h1>查看试题</h1>
-				<div className="ant-top">
-                    <div className='top-list'>
-						<span>课程类型:</span>
-						<span>All</span>
-						{this.state.topList.map((item: any, index) => {
-							return (
-								<div className='item-con' key={index}>
-									<span>{item.subject_text}</span>
-								</div>
-							);
-						})}
-					</div>
-					<div className="topList-b">
-						<div>
-							考试类型:
-							<Select defaultValue='' style={{ width: 120 }}>
-								<Option value='周考一'>周考一</Option>
-								<Option value='周考二'>周考二</Option>
-								<Option value='周考三'>周考三</Option>
-								<Option value='月考'>月考</Option>
-							</Select>
-						</div>
-						<div>
-							题目类型:
-							<Select defaultValue='' style={{ width: 120 }}>
-								<Option value='周考一'>周考一</Option>
-								<Option value='周考二'>周考二</Option>
-								<Option value='周考三'>周考三</Option>
-								<Option value='月考'>月考</Option>
-							</Select>
-						</div>
-						<div>
-							<Button type='primary' icon='search'>
-								查询
-							</Button>
-						</div>
-					</div>
+            examQuestion: resultList.data,
+            titleType: typeList.data,
+            examType: examList.data
+        })
+    }
+    public render() {
+        return (
+            <div>
+                <h1>查看试题</h1>
+                <div className="ant-top">
+                    <div className="row">
+                        <div className="row1" style={{ fontSize: '13px' }}>
+                            <b>课程类型</b>:
+                        </div>
+                        <div className="row2">
+                            <div className="control">
+                                <span className="child">
+                                    <span className="tag ant-tag-checkable">
+                                        All
+                                    </span>
+                                    {this.state.topList.map(
+                                        (item: any, index) => {
+                                            return (
+                                                <span
+                                                    className={
+                                                        this.state.current ===
+                                                        index
+                                                            ? 'tag ant-tag-checkable-checked'
+                                                            : 'tag ant-tag-checkable'
+                                                    }
+                                                    key={index}
+                                                    onClick={this.clicks.bind(
+                                                        this,
+                                                        index
+                                                    )}>
+                                                    {item.subject_text}
+                                                </span>
+                                            )
+                                        }
+                                    )}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="topList-b">
+                        <div style={{ fontSize: '13px' }}>
+                            <b>考试类型</b>:
+                            <Select defaultValue="" style={{ width: 200 }}>
+                                <OptGroup label="考试类型">
+                                    {this.state.examType.map(
+                                        (item: any, index) => {
+                                            return (
+                                                <Option
+                                                    value={item.exam_name}
+                                                    key={index}>
+                                                    {item.exam_name}
+                                                </Option>
+                                            )
+                                        }
+                                    )}
+                                </OptGroup>
+                            </Select>
+                        </div>
+                        <div style={{ fontSize: '13px' }}>
+                            <b>题目类型</b>:
+                            <Select defaultValue="" style={{ width: 200 }}>
+                                <OptGroup label="题目类型">
+                                    {this.state.titleType.map(
+                                        (item: any, index) => {
+                                            return (
+                                                <Option
+                                                    value={
+                                                        item.questions_type_text
+                                                    }
+                                                    key={index}>
+                                                    {item.questions_type_text}
+                                                </Option>
+                                            )
+                                        }
+                                    )}
+                                </OptGroup>
+                            </Select>
+                        </div>
+                        <div>
+                            <Button type="primary" icon="search">
+                                查询
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-					
-				
+
                 <Layout>
                     <div className="ant-list">
-                        {this.state.examQuestion.map((item:any,index:number)=>{
-                            return <div className="antd-list-item" key={index}>
-                                <div className="antd-list-item-l">
-                                    <div className="antd-list-item-l-t">
-                                        <h4>{item.title}</h4>
-                                    </div>
-                                    <div className="antd-list-item-l-b">
-                                        <div>
-                                            <div className="ant-tag ant-tag-blue">{item.questions_type_text}</div>
-                                            <div className="ant-tag ant-tag-geekblue">{item.subject_text}</div>
-                                            <div className="ant-tag ant-tag-orange">{item.exam_name}</div>
+                        {this.state.examQuestion.map(
+                            (item: any, index: number) => {
+                                return (
+                                    <div
+                                        className="antd-list-item"
+                                        key={index}
+                                        onClick={() => {
+                                            this.props.history.replace(
+                                                '/home/detail?' +
+                                                    item.questions_type_id
+                                            )
+                                            console.log(this.props)
+                                        }}>
+                                        <div className="antd-list-item-l">
+                                            <div className="antd-list-item-l-t">
+                                                <h4
+                                                    style={{
+                                                        fontSize: '16px'
+                                                    }}>
+                                                    {item.title}
+                                                </h4>
+                                            </div>
+                                            <div className="antd-list-item-l-b">
+                                                <div>
+                                                    <div className="ant-tag ant-tag-blue">
+                                                        {
+                                                            item.questions_type_text
+                                                        }
+                                                    </div>
+                                                    <div className="ant-tag ant-tag-geekblue">
+                                                        {item.subject_text}
+                                                    </div>
+                                                    <div className="ant-tag ant-tag-orange">
+                                                        {item.exam_name}
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    style={{
+                                                        fontSize: '16px'
+                                                    }}>
+                                                    {item.user_name}发布
+                                                </span>
+                                            </div>
                                         </div>
-                                        <span>{item.user_name}发布</span>
+                                        <ul className="antd-list-item-r">
+                                            <li
+                                                style={{
+                                                    fontSize: '14px'
+                                                }}>
+                                                <a
+                                                    href=""
+                                                    style={{
+                                                        fontSize: '14px'
+                                                    }}>
+                                                    编辑
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <ul className="antd-list-item-r">
-                                    <li>编辑</li>
-                                </ul>
-                            </div>
-                        })} 
-                    </div>   
+                                )
+                            }
+                        )}
+                    </div>
                 </Layout>
-			</div>
-		);
-	}
+            </div>
+        )
+    }
 }
 
-export default CheckTextQuestion;
+export default CheckTextQuestion

@@ -1,7 +1,7 @@
 import { Icon, Layout, Menu } from 'antd'
 import * as React from 'react'
 import { NavLink } from 'react-router-dom'
-import '../../../index.css'
+import '../../index.css'
 const { Header, Content, Sider } = Layout
 const { SubMenu } = Menu
 
