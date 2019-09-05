@@ -3,6 +3,7 @@ import AddList from '../views/main/addList'
 import CheckTextQuestion from '../views/main/checkTextQuestion'
 import TextQuestion from '../views/main/textQuestion'
 import HomePage from 'src/views/main/home';
+import UserShow from 'src/views/main/UserShow';
 
 
 export default {
@@ -25,6 +26,10 @@ export default {
                     path: '/home/textQuestion'
     
                 }, {
+                    component:UserShow,
+                    path:'/home/usershow'
+                },
+                {
                     from: '/home',
                     to: '/home/addlist'
                 }

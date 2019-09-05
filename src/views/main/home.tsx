@@ -1,11 +1,12 @@
 import { Icon, Layout, Menu } from 'antd'
 import * as React from 'react'
 import { NavLink } from 'react-router-dom'
-import '../../../index.css'
+import '../../index.css'
 const { Header, Content, Sider } = Layout
 const { SubMenu } = Menu
 
 class HomePage extends React.Component {
+    
     render() {
         return (
             <Layout>
@@ -63,7 +64,7 @@ class HomePage extends React.Component {
                                 </span>
                             }>
                             <Menu.Item key="5">添加用户</Menu.Item>
-                            <Menu.Item key="6">用户展示</Menu.Item>
+                            <Menu.Item key="6"><NavLink to='/home/usershow'>用户展示</NavLink></Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key="sub3"
@@ -110,12 +111,7 @@ class HomePage extends React.Component {
                         </span>
                     </Header>
                     <Content style={{ margin: '24px 16px 0' }}>
-                        <div
-                            style={{
-                                padding: 24,
-                                background: '#ccc',
-                                minHeight: 360
-                            }}>
+                        <div>
                             {this.props.children}
                         </div>
                     </Content>
