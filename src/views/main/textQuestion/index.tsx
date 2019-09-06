@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Button, Table, Modal, Input } from 'antd'
+import { Button, Table, Modal, Input, message } from 'antd'
 
 interface Props {
     question: any
@@ -18,7 +18,47 @@ class TextQuestion extends React.Component<Props> {
     state = {
         data: [],
         modal1Visible: false,
-        modal2Visible: false
+        modal2Visible: false,
+        typeData: '',
+        sort: ''
+    }
+
+    setModal1Visible(modal1Visible: any) {
+        this.setState({ modal1Visible })
+    }
+    //获取添加试卷分类的值
+    handChange = (e: any) => {
+        let { value } = e.target
+        this.setState({
+            typeData: value
+        })
+    }
+    //更改显示框的隐藏和显示状态
+    setModal2Visible(modal2Visible: any) {
+        this.setState({
+            modal2Visible: modal2Visible.show
+        })
+        if (modal2Visible.key === '确认') {
+            this.AddGetType()
+            this.setState({
+                typeData: ''
+            })
+        }
+    }
+    //调用mobx 发起axios请求
+    AddGetType = async () => {
+        let { getAddExamType } = this.props.question
+        let result = await getAddExamType({
+            text: this.state.typeData,
+            sort: this.state.sort + ''
+        })
+        if (result.code === 1) {
+            //添加成功后重新渲染数据
+            message.success(result.msg)
+        } else {
+            message.error(result.msg)
+        }
+        this.getList()
     }
 
     setModal1Visible(modal1Visible: any) {
@@ -36,7 +76,8 @@ class TextQuestion extends React.Component<Props> {
         const { getQuestionsType } = this.props.question
         let result = await getQuestionsType()
         this.setState({
-            data: result.data
+            data: result.data,
+            sort: result.data.length + 1
         })
     }
 
@@ -63,7 +104,7 @@ class TextQuestion extends React.Component<Props> {
                 caozuo: ''
             }
         })
-
+        let { typeData } = this.state
         return (
             <div>
                 <h1 style={{ fontSize: '18px', margin: '0 0 10px 0' }}>
@@ -74,15 +115,32 @@ class TextQuestion extends React.Component<Props> {
                         <Button
                             type="primary"
                             style={{ padding: '0 40px', fontWeight: 'bold' }}
-                            onClick={() => this.setModal2Visible(true)}>
+                            onClick={() =>
+                                this.setModal2Visible({
+                                    show: true,
+                                    key: '添加'
+                                })
+                            }>
                             +添加按钮
                         </Button>
                         <Modal
                             title="创建新类型"
                             centered
+                            okText="确认"
+                            cancelText="取消"
                             visible={this.state.modal2Visible}
-                            onOk={() => this.setModal2Visible(false)}
-                            onCancel={() => this.setModal2Visible(false)}>
+                            onOk={() =>
+                                this.setModal2Visible({
+                                    show: false,
+                                    key: '确认'
+                                })
+                            }
+                            onCancel={() =>
+                                this.setModal2Visible({
+                                    show: false,
+                                    key: '取消'
+                                })
+                            }>
                             <Input
                                 style={{
                                     border: 'none',
@@ -91,6 +149,8 @@ class TextQuestion extends React.Component<Props> {
                                 }}
                                 size="large"
                                 placeholder="请输入类型名称"
+                                value={typeData}
+                                onChange={this.handChange}
                             />
                         </Modal>
                     </div>

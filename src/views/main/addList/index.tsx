@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import Editor from 'for-editor'
-import { Select, Input, Button, Modal } from 'antd'
+import { Select, Input, Button, Modal, message } from 'antd'
 import './index.css'
 const { Option, OptGroup } = Select
 const { confirm } = Modal
@@ -20,12 +20,20 @@ class AddList extends React.Component<Props> {
     state = {
         topList: [],
         examType: [],
-        titleType: []
+        titleType: [],
+        questions_type_id: '', //试题类型id
+        questions_stem: '', //题干
+        subject_id: '', //课程id
+        exam_id: '', //考试类型id
+        user_id: '', //用户id
+        questions_answer: '', //题目答案
+        title: '' //试题的标题
     }
     componentDidMount() {
         this.getList()
     }
-    showConfirm() {
+    showConfirm = () => {
+        let that = this
         confirm({
             title: '你确定要添加这道题么?',
             content: '真的要添加么',
@@ -45,6 +53,31 @@ class AddList extends React.Component<Props> {
                     clearInterval(timer)
                     modal.destroy()
                 }, secondsToGo * 1000)
+                const { getAddexam } = that.props.question
+                let {
+                    questions_type_id,
+                    questions_stem,
+                    subject_id,
+                    exam_id,
+                    user_id,
+                    questions_answer,
+                    title
+                } = that.state
+                async function getAddUserInfo() {
+                    let result = await getAddexam({
+                        questions_type_id,
+                        questions_stem,
+                        subject_id,
+                        exam_id,
+                        user_id,
+                        questions_answer,
+                        title
+                    })
+                    if (result.code === 1) {
+                        message.success(result.msg)
+                    }
+                }
+                getAddUserInfo()
             },
             onCancel() {
                 console.log('取消')
@@ -54,23 +87,50 @@ class AddList extends React.Component<Props> {
     getList = async () => {
         const {
             getQuestionSubject,
-            getAddexam,
             getQuestionsType,
-            getQuestionTypes
+            getQuestionTypes,
+            getUserInfo
         } = this.props.question
+
         let results = await getQuestionSubject()
-        let result = await getAddexam()
+        let userInfoId = await getUserInfo()
         let typeList = await getQuestionsType()
         let examList = await getQuestionTypes()
-        console.log(result)
+        // console.log(result)
         this.setState({
             topList: results.data,
-            AddList: result.msg,
+            user_id: userInfoId.data.user_id,
             titleType: typeList.data,
             examType: examList.data
         })
     }
+    //获取input框变化的值
+    handChange = (e: any) => {
+        let { name, value } = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+    //获取题库题目的变化
+    handChangeStem = (value: any) => {
+        this.setState({
+            questions_stem: value
+        })
+    }
+    //获取答案的参数
+    handChangeAnswer = (value: any) => {
+        this.setState({
+            questions_answer: value
+        })
+    }
+    //获取select参数
+    handSelect = (obj: any) => {
+        let { value, type } = obj
+        this.setState({ [type]: value })
+    }
+
     public render() {
+        let { title, questions_stem, questions_answer } = this.state
         return (
             <div>
                 <div style={{ fontSize: '18px', margin: '0 0 10px 0' }}>
@@ -85,25 +145,35 @@ class AddList extends React.Component<Props> {
                         className="antd-inp"
                         size="large"
                         placeholder="请输入题目标题，不超过20个字"
+                        name="title"
+                        value={title}
+                        onChange={this.handChange}
                     />
                 </div>
                 <div style={{ fontSize: '13px', margin: '20px 0 10px 0' }}>
                     题目主题
                 </div>
                 <div className="for-content">
-                    <Editor></Editor>
+                    <Editor
+                        value={questions_stem}
+                        onChange={this.handChangeStem}></Editor>
                 </div>
                 <div>
                     <div style={{ fontSize: '13px' }}>
                         <div style={{ margin: '20px 0 10px 0' }}>
                             <b>请选择考试类型</b>:
                         </div>
-                        <Select defaultValue="周考1" style={{ width: 200 }}>
+                        <Select
+                            defaultValue="周考1"
+                            style={{ width: 200 }}
+                            onChange={(value: any) =>
+                                this.handSelect({ value, type: 'exam_id' })
+                            }>
                             <OptGroup label="">
                                 {this.state.examType.map((item: any, index) => {
                                     return (
                                         <Option
-                                            value={item.exam_name}
+                                            value={item.exam_id}
                                             key={index}>
                                             {item.exam_name}
                                         </Option>
@@ -118,12 +188,15 @@ class AddList extends React.Component<Props> {
                         </div>
                         <Select
                             defaultValue="javaScript上"
-                            style={{ width: 200 }}>
+                            style={{ width: 200 }}
+                            onChange={(value: any) =>
+                                this.handSelect({ value, type: 'subject_id' })
+                            }>
                             <OptGroup label="">
                                 {this.state.topList.map((item: any, index) => {
                                     return (
                                         <Option
-                                            value={item.subject_text}
+                                            value={item.subject_id}
                                             key={index}>
                                             {item.subject_text}
                                         </Option>
@@ -136,13 +209,21 @@ class AddList extends React.Component<Props> {
                         <div style={{ margin: '20px 0 10px 0' }}>
                             <b>请选择题目类型</b>:
                         </div>
-                        <Select defaultValue="简答题" style={{ width: 200 }}>
+                        <Select
+                            defaultValue="简答题"
+                            style={{ width: 200 }}
+                            onChange={(value: any) =>
+                                this.handSelect({
+                                    value,
+                                    type: 'questions_type_id'
+                                })
+                            }>
                             <OptGroup label="">
                                 {this.state.titleType.map(
                                     (item: any, index) => {
                                         return (
                                             <Option
-                                                value={item.questions_type_text}
+                                                value={item.questions_type_id}
                                                 key={index}>
                                                 {item.questions_type_text}
                                             </Option>
@@ -156,7 +237,9 @@ class AddList extends React.Component<Props> {
                         答案信息
                     </div>
                     <div className="for-content">
-                        <Editor></Editor>
+                        <Editor
+                            value={questions_answer}
+                            onChange={this.handChangeAnswer}></Editor>
                     </div>
                     <div style={{ margin: '20px 0 0px 0' }}>
                         <Button

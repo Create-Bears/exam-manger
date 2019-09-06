@@ -1,33 +1,34 @@
 import * as React from 'react'
-import { Button, Input, Select,message } from 'antd'
+import { Button, Input, Select, message } from 'antd'
 const { Option } = Select;
 
 interface IProps {
     Sfid?: any,
-    aDDuser?:any
+    aDDuser?: any
 }
 
 class AddUser extends React.Component<IProps>{
     constructor(props: IProps) {
         super(props)
+        console.log(this.props)
     }
     state = {
-        SfId: [],
         user_name: '',
         user_pwd: '',
-        identity_id:'',
+        identity_id: '',
     }
     handleChange = (value: any) => {
         console.log(value)
         this.setState({
-            identity_id:value
+            identity_id: value
         })
     }
     getUserId = async () => {
         console.log(this.props)
     }
     render() {
-        let { SfId ,user_name,user_pwd} = this.state;
+        let { user_name, user_pwd } = this.state;
+        let { Sfid } = this.props;
         return (
             <div className="adduser-wrapper">
                 <div className="adduser-input">
@@ -42,9 +43,9 @@ class AddUser extends React.Component<IProps>{
                 </div>
                 <div className="adduser-input">
                     <Select placeholder="请选择身份id" style={{ width: 120 }} onChange={this.handleChange}>
-                        {SfId.map((item: any, index: number) => {
+                        {Sfid ? Sfid.map((item: any, index: number) => {
                             return <Option key={index} value={item.identity_id}>{item.identity_text}</Option>
-                        })}
+                        }) : null}
                     </Select>
                 </div>
                 <div className="adduser-input">
@@ -66,20 +67,20 @@ class AddUser extends React.Component<IProps>{
             [name]: value
         })
     }
-   
-     //添加用户信息
-     handAddUser =async () => {
-        let {user_name,user_pwd,identity_id}=this.state;
+
+    //添加用户信息
+    handAddUser = async () => {
+        let { user_name, user_pwd, identity_id } = this.state;
         console.log(this.props);
-        let {getAddUser}=this.props.aDDuser;
+        let { getAddUser } = this.props.aDDuser;
         let result = await getAddUser({
-            "user_name":user_name,
-            "user_pwd":user_pwd,
-            "identity_id":identity_id
+            "user_name": user_name,
+            "user_pwd": user_pwd,
+            "identity_id": identity_id
         })
-        if(result.code===1){
+        if (result.code === 1) {
             message.success(result.msg)
-        }else{
+        } else {
             message.error(result.msg)
         }
     }

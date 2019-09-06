@@ -21,9 +21,9 @@ instance.interceptors.request.use( (config)=> {
 // Add a response interceptor
 instance.interceptors.response.use( (response)=> {
     // Do something with response data
-    if (response.status !== 200){
-        message.error(response.statusText);
-      }
+    // if (response.status !== 200){
+    //     message.error(response.statusText);
+    //   }
     return response.data;
 },  (error)=> {
     console.log('error...', error.response);
