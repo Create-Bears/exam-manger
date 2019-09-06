@@ -6,6 +6,8 @@
 .adduser-content{
     display: flex;
     flex-wrap: wrap;
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
 }
 .adduser-wrapper{
     width: 33.3%;

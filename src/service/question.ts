@@ -29,11 +29,16 @@ export let getQuestionExam = (params: object) => {
 //添加试卷
 export let getAddexam = (params: object) => {
     const url = '/exam/questions'
-    return request.get(url, {
+    return request.post(url, params)
+}
+
+//添加试题类型
+export let getAddExamType =(params:object)=>{
+    const url ='/exam/insertQuestionsType';
+    return request.get(url,{
         params
     })
 }
-
 
 //待批班级的列表
 export let getWaitexam = (params: object) => {
@@ -41,4 +46,10 @@ export let getWaitexam = (params: object) => {
     return request.get(url, {
         params
     })
+}
+
+// 获取当前用户信息
+export let getUserInfo=()=>{
+    const url ='/user/userInfo';
+    return request.get(url)
 }

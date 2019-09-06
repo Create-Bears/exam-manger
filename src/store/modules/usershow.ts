@@ -6,7 +6,11 @@ import {
     getUserApiType ,
     getUserApiView,
     getAddUser,
-    getAddIdentity
+    getAddIdentity,
+    addApiIdentity,
+    addViewAuthor,
+    setApiViewAuthor,
+    setViewIdentity
 } from '../../service/index'
 
 class UserShow {
@@ -37,8 +41,8 @@ class UserShow {
         }
     ]
 
-    @action async getUser(): Promise<any> {
-        let result: any = await getUser();
+    @action async getUser(url:string): Promise<any> {
+        let result: any = await getUser(url);
         if (result.code === 1) {
             return result.data
         }
@@ -79,6 +83,26 @@ class UserShow {
     //添加身份
     @action async getAddIdentity(params:object){
         let result:any=await getAddIdentity(params);
+        return result
+    }
+    //给api添加接口权限
+    @action async addApiIdentity(params:object){
+        let result:any=await addApiIdentity(params);
+        return result
+    }
+    //添加视图权限
+    @action async addViewAuthor(params:object){
+        let result :any=await addViewAuthor(params);
+        return result
+    }
+    //给身份设置api接口权限
+    @action async setApiViewAuthor(params:object){
+        let result:any=await setApiViewAuthor(params)
+        return result
+    }
+    //给身份设定视图权限
+    @action async setViewIdentity(params:object){
+        let result:any=await setViewIdentity(params)
         return result
     }
 }
