@@ -97,7 +97,9 @@ class HomePage extends React.Component {
                                     阅卷管理
                                 </span>
                             }>
-                            <Menu.Item key="14">待批班级</Menu.Item>
+                            <Menu.Item key="14">
+                                <NavLink to="/home/waitClass">待批班级</NavLink>
+                            </Menu.Item>
                         </SubMenu>
                     </Menu>
                 </Sider>
