@@ -58,7 +58,8 @@ class WaitClass extends React.Component<Props> {
                 status: item.status === '0' ? '未阅' : '已阅',
                 projects: item.subject_text,
                 success: item.room_text[0],
-                option: item.status === '0' ? '批卷' : ''
+                option: item.status === '0' ? '批卷' : '',
+                key: ''
             }
         })
         return (

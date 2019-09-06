@@ -5,7 +5,8 @@ import {
     getQuestionSubject, //课题
     getQuestionExam, //试题列表 详情数据
     getAddexam, //添加试卷
-    getWaitexam //待批班级列表
+    getWaitexam, //待批班级列表
+    getUpdataexam // 编辑更新试题
 } from '../../service/index'
 
 class Question {
@@ -37,6 +38,11 @@ class Question {
 
     @action async getWaitexam(params: any): Promise<any> {
         let result: any = await getWaitexam(params)
+        return result
+    }
+
+    @action async getUpdataexam(params: any): Promise<any> {
+        let result: any = await getUpdataexam(params)
         return result
     }
 }

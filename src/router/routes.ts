@@ -7,6 +7,8 @@ import WaitClass from '../views/main/waitClass'
 import HomePage from '../views/main/home'
 import UserShow from '../views/main/UserShow'
 import AddUser from '../views/main/addUser'
+import ClassManger from '../views/main/classManger'
+import CheckTextEditor from '../views/main/checkTextEditor'
 
 export default {
     routes: [
@@ -27,6 +29,14 @@ export default {
                 {
                     component: TextQuestion,
                     path: '/home/textQuestion'
+                },
+                {
+                    component: ClassManger,
+                    path: '/home/classManger'
+                },
+                {
+                    component: CheckTextEditor,
+                    path: '/home/checkTextEditor/:id?'
                 },
                 {
                     component: WaitClass,

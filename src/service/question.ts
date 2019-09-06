@@ -34,11 +34,16 @@ export let getAddexam = (params: object) => {
     })
 }
 
-
 //待批班级的列表
 export let getWaitexam = (params: object) => {
     const url = '/exam/exam'
     return request.get(url, {
         params
     })
+}
+
+//编辑更新试题
+export let getUpdataexam = (params: object) => {
+    const url = '/exam/exam/w5tcy-g2dts'
+    return request.put(url, params)
 }
