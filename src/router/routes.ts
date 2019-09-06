@@ -2,9 +2,12 @@ import Login from '../views/Login'
 import AddList from '../views/main/addList'
 import CheckTextQuestion from '../views/main/checkTextQuestion'
 import TextQuestion from '../views/main/textQuestion'
-import HomePage from 'src/views/main/home'
 import Detail from '../views/main/detail'
 import WaitClass from '../views/main/waitClass'
+import HomePage from '../views/main/home'
+import UserShow from '../views/main/UserShow'
+import AddUser from '../views/main/addUser'
+
 export default {
     routes: [
         {
@@ -26,12 +29,20 @@ export default {
                     path: '/home/textQuestion'
                 },
                 {
-                    component:WaitClass,
+                    component: WaitClass,
                     path: '/home/waitClass'
                 },
                 {
                     component: Detail,
                     path: '/home/detail/:id?'
+                },
+                {
+                    component: UserShow,
+                    path: '/home/usershow'
+                },
+                {
+                    component: AddUser,
+                    path: '/home/adduser'
                 },
                 {
                     from: '/home',
