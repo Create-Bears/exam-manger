@@ -63,7 +63,7 @@ class HomePage extends React.Component {
                                     用户管理
                                 </span>
                             }>
-                            <Menu.Item key="5">添加用户</Menu.Item>
+                            <Menu.Item key="5"><NavLink to='/home/adduser'>添加用户</NavLink></Menu.Item>
                             <Menu.Item key="6"><NavLink to='/home/usershow'>用户展示</NavLink></Menu.Item>
                         </SubMenu>
                         <SubMenu

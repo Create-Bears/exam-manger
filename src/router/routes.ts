@@ -4,6 +4,7 @@ import CheckTextQuestion from '../views/main/checkTextQuestion'
 import TextQuestion from '../views/main/textQuestion'
 import HomePage from 'src/views/main/home';
 import UserShow from 'src/views/main/UserShow';
+import AddUser from 'src/views/main/addUser';
 
 
 export default {
@@ -28,6 +29,9 @@ export default {
                 }, {
                     component:UserShow,
                     path:'/home/usershow'
+                },{
+                    component:AddUser,
+                    path:'/home/adduser'
                 },
                 {
                     from: '/home',

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {getToken} from './index'
+import {message} from 'antd'
 
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:7001',
@@ -20,8 +21,17 @@ instance.interceptors.request.use( (config)=> {
 // Add a response interceptor
 instance.interceptors.response.use( (response)=> {
     // Do something with response data
+    if (response.status !== 200){
+        message.error(response.statusText);
+      }
     return response.data;
 },  (error)=> {
+    console.log('error...', error.response);
+    if (error.response.status && error.response.status !== 200){
+      message.error(error.response.statusText);
+    }else{
+      // message.error(error.response);
+    }
     // Do something with response error
     return Promise.reject(error);
 });
