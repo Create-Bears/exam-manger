@@ -1,0 +1,21 @@
+.adduser-title{
+    padding: 10px 0px;
+    font-size: 24px;
+}
+
+.adduser-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+.adduser-wrapper{
+    width: 33.3%;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.adduser-input{
+    margin-bottom: 20px
+}
