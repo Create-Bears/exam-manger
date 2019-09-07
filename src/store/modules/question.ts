@@ -5,8 +5,8 @@ import {
     getQuestionSubject, //课题
     getQuestionExam, //试题列表 详情数据
     getAddexam, //添加试卷
-    getUpdataexam // 编辑更新试题
-    getAddExamType,//添加试题类型
+    getUpdataexam, // 编辑更新试题
+    getAddExamType, //添加试题类型
     getWaitexam, //待批班级列表
     getUserInfo //获取当前用户的id信息
 } from '../../service/index'
@@ -48,12 +48,12 @@ class Question {
         return result
     }
     //添加试题类型
-    @action async getAddExamType(params:any):Promise<any>{
-        let result:any=await getAddExamType(params);
+    @action async getAddExamType(params: any): Promise<any> {
+        let result: any = await getAddExamType(params)
         return result
     }
-    @action async getUserInfo():Promise<any>{
-        let result:any=await getUserInfo();
+    @action async getUserInfo(): Promise<any> {
+        let result: any = await getUserInfo()
         return result
     }
 }

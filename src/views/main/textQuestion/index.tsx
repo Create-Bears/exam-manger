@@ -61,13 +61,13 @@ class TextQuestion extends React.Component<Props> {
         this.getList()
     }
 
-    setModal1Visible(modal1Visible: any) {
-        this.setState({ modal1Visible })
-    }
+    // setModal1Visible(modal1Visible: any) {
+    //     this.setState({ modal1Visible })
+    // }
 
-    setModal2Visible(modal2Visible: boolean) {
-        this.setState({ modal2Visible })
-    }
+    // setModal2Visible(modal2Visible: boolean) {
+    //     this.setState({ modal2Visible })
+    // }
 
     componentDidMount() {
         this.getList()
