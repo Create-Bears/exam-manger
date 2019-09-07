@@ -5,7 +5,7 @@ import {
     getQuestionSubject, //课题
     getQuestionExam, //试题列表 详情数据
     getAddexam, //添加试卷
-    getUpdataexam // 编辑更新试题
+    getUpdataexam, // 编辑更新试题
     getAddExamType,//添加试题类型
     getWaitexam, //待批班级列表
     getUserInfo //获取当前用户的id信息

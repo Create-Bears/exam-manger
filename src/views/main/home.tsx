@@ -77,8 +77,8 @@ class HomePage extends React.Component {
                                     考试管理
                                 </span>
                             }>
-                            <Menu.Item key="9">添加考试</Menu.Item>
-                            <Menu.Item key="10">试卷列表</Menu.Item>
+                            <Menu.Item key="9"><NavLink to="/home/examManage">添加考试</NavLink></Menu.Item>
+                            <Menu.Item key="10"><NavLink to="/home/questionList">试卷列表</NavLink></Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key="sub4"

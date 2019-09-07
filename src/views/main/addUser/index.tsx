@@ -23,30 +23,32 @@ class AddUser extends React.Component<Props>{
         ApiType: [],
         ApiView: [],
         identity_text:'',
+        userId:[],
     }
     componentDidMount() {
         this.getUserId();
     }
     
     getUserId = async () => {
-        // ,getUserId
-        let { getIdentity, getUserApiType, getUserApiView } = this.props.userShow;
-        let result = await getIdentity();
-        let resultApiType = await getUserApiType();
-        let resultApiView = await getUserApiView()
+        const { getIdentity,getUserId, getUserApiType, getUserApiView } = this.props.userShow;
+        const result = await getIdentity();
+        const resultId = await getUserId();
+        const resultApiType = await getUserApiType();
+        const resultApiView = await getUserApiView()
         this.setState({
             SfId: result,
             ApiType: resultApiType,
-            ApiView: resultApiView
+            ApiView: resultApiView,
+            userId:resultId
         })
     }
     render() {
-        let { SfId,ApiView,ApiType } = this.state;
+        let { SfId,ApiView,ApiType,userId } = this.state;
         return (
             <div>
                 <h2 className="adduser-title">添加用户</h2>
                 <div className="adduser-content">
-                    <ADDUser Sfid={SfId} aDDuser={this.props.userShow}/>
+                    <ADDUser Sfid={SfId} userId={userId} aDDuser={this.props.userShow}/>
                     <AddIdentity addIdentity={this.props.userShow}/>
                     <AddApiIdentity addApiIdentity={this.props.userShow}/>
                     <AddView Apiview={ApiView} addViewAuthor={this.props.userShow}/>

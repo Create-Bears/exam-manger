@@ -48,6 +48,7 @@ class TextQuestion extends React.Component<Props> {
     //调用mobx 发起axios请求
     AddGetType = async () => {
         let { getAddExamType } = this.props.question
+        console.log(this.state.typeData)
         let result = await getAddExamType({
             text: this.state.typeData,
             sort: this.state.sort + ''
@@ -60,15 +61,6 @@ class TextQuestion extends React.Component<Props> {
         }
         this.getList()
     }
-
-    setModal1Visible(modal1Visible: any) {
-        this.setState({ modal1Visible })
-    }
-
-    setModal2Visible(modal2Visible: boolean) {
-        this.setState({ modal2Visible })
-    }
-
     componentDidMount() {
         this.getList()
     }

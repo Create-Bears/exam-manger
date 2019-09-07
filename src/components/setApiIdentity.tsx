@@ -13,6 +13,12 @@ class SetApiIdentity extends React.Component<SetApiProps>{
     identity_id: '',
     api_authority_id: ''
   }
+  handClear = () => {
+    this.setState({
+      identity_id: '',
+      api_authority_id: ''
+    })
+  }
   handleChange = (obj: any) => {
     let { value, type } = obj;
     this.setState({
@@ -22,15 +28,20 @@ class SetApiIdentity extends React.Component<SetApiProps>{
   handClick = async () => {
     let { identity_id, api_authority_id } = this.state;
     let { setApiViewAuthor } = this.props.setApiViewAuthor;
-    let result = await setApiViewAuthor({
-      "identity_id": identity_id,
-      "api_authority_id": api_authority_id
-    })
-    if (result.code === 1) {
-      message.success(result.msg)
+    if (identity_id === '' || api_authority_id === '') {
+      message.error('未设置api接口权限,请设置')
     } else {
-      message.error(result.msg)
+      let result = await setApiViewAuthor({
+        "identity_id": identity_id,
+        "api_authority_id": api_authority_id
+      })
+      if (result.code === 1) {
+        message.success(result.msg)
+      } else {
+        message.error(result.msg)
+      }
     }
+
   }
   render() {
     let { Sfid, Apitype } = this.props;
@@ -54,8 +65,8 @@ class SetApiIdentity extends React.Component<SetApiProps>{
           </Select>
         </div>
         <div className="adduser-input">
-          <Button type="primary" onClick={this.handClick}>确定</Button>
-          <Button>重置</Button>
+          <Button type="primary" className="btn-active" onClick={this.handClick}>确定</Button>
+          <Button onClick={this.handClear}>重置</Button>
         </div>
       </div>
     )
