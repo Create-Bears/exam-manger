@@ -19,3 +19,16 @@
     margin: 0px 0px 20px;
     border-radius: 10px
 }
+.questionList-btn{
+    margin-bottom: 25px;
+    display: flex
+}
+.questionList-btns{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+.btn-actives{
+    color: #1890ff!important;
+}
