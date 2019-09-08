@@ -163,7 +163,7 @@ class UserShow extends React.Component<Props>{
       <div className="user-btn">
         {userList.map((item: any, index: number) => {
           return <ul key={index}>
-            <li className={ShowIndex===index?'active':''} onClick={() => this.handClick(index)}>{item.title}</li>
+            <li className={ShowIndex === index ? 'btnactive' : ''} onClick={() => this.handClick(index)}>{item.title}</li>
           </ul>
         })}
       </div>

@@ -27,11 +27,17 @@ class AddViewPage extends React.Component<ViewProps>{
           </Select>
         </div>
         <div className="adduser-input">
-          <Button type="primary" onClick={this.handClick}>确定</Button>
-          <Button>重置</Button>
+          <Button type="primary" className="btn-active" onClick={this.handClick}>确定</Button>
+          <Button onClick={this.handClear}>重置</Button>
         </div>
       </div>
     )
+  }
+  handClear=()=>{
+    this.setState({
+      view_authority_text:'',
+      view_id:''
+    })
   }
   handleChange = (value: string) => {
     this.setState({

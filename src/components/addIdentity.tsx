@@ -29,11 +29,16 @@ class AddUser extends React.Component<IProps>{
           <Input placeholder="请输入身份名称" name="identity_text" value={identity_text} onChange={this.handAddUserValue} />
         </div>
         <div className="adduser-input">
-          <Button type="primary" onClick={this.handClickSf}>确定</Button>
-          <Button>重置</Button>
+          <Button type="primary" className="btn-active" onClick={this.handClickSf}>确定</Button>
+          <Button onClick={this.handClear}>重置</Button>
         </div>
       </div>
     )
+  }
+  handClear=()=>{
+    this.setState({
+      identity_text:''
+    })
   }
   //添加身份
   handClickSf = async () => {

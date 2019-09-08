@@ -3,7 +3,7 @@ import {getToken} from './index'
 import {message} from 'antd'
 
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1:7001',
+    baseURL: 'http://169.254.191.25:7001',
     timeout: 1000,
     headers: { 'authorization': getToken() }
 });

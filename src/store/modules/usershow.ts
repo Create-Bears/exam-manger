@@ -10,7 +10,8 @@ import {
     addApiIdentity,
     addViewAuthor,
     setApiViewAuthor,
-    setViewIdentity
+    setViewIdentity,
+    updataUser
 } from '../../service/index'
 
 class UserShow {
@@ -103,6 +104,11 @@ class UserShow {
     //给身份设定视图权限
     @action async setViewIdentity(params:object){
         let result:any=await setViewIdentity(params)
+        return result
+    }
+    //更新用户信息
+    @action async updataUser(params:object){
+        let result:any=await updataUser(params);
         return result
     }
 }

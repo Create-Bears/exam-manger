@@ -43,7 +43,7 @@ class AddApiIdentity extends React.Component<AddApi>{
           />
         </div>
         <div className="adduser-input">
-          <Button type="primary" onClick={this.handClick}>确定</Button>
+          <Button type="primary"  className="btn-active" onClick={this.handClick}>确定</Button>
           <Button onClick={this.handClear}>重置</Button>
         </div>
       </div>

@@ -9,6 +9,8 @@ import UserShow from '../views/main/UserShow'
 import AddUser from '../views/main/addUser'
 import ClassManger from '../views/main/classManger'
 import CheckTextEditor from '../views/main/checkTextEditor'
+import ExamManage from 'src/views/main/examManage/examManage'
+import QuestionList from 'src/views/main/questionList'
 
 export default {
     routes: [
@@ -55,8 +57,11 @@ export default {
                     path: '/home/adduser'
                 },
                 {
-                    from: '/home',
-                    to: '/home/addlist'
+                    component:ExamManage,
+                    path:'/home/examManage'
+                },{
+                    component:QuestionList,
+                    path:'/home/questionList'
                 }
             ],
             component: HomePage,

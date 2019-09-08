@@ -71,3 +71,10 @@ export let setViewIdentity = (params: object) => {
   const url = '/user/setIdentityView';
   return request.post(url, params)
 }
+
+
+//更新用户信息
+export let updataUser = (params:object)=>{
+  const url ='/user/user';
+  return request.put(url,params)
+}
