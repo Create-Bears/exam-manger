@@ -25,31 +25,35 @@ interface Props {
 class ClassManger extends React.Component<Props> {
     state = {
         data: [],
-        addList: '',
-        names: '',
         classroom: [],
         subject: [],
-        vals: '',
-        val: '',
         subject_id: '',
         room_id: '',
         visible: false,
         class: '',
         classes: '',
         project: '',
-        grade_id: ''
+        grade_id: '',
+        disabled: false
     }
 
     updataClicks = (text: any) => {
+        this.showModal()
         this.setState({
-            visible: true
+            disabled: true
         })
         this.props.form.setFieldsValue({
             class: text.class,
             classes: text.classes,
             project: text.project
         })
-        this.UpdataClass(text)
+        this.state.data.map((item: any) => {
+            if (text.class === item.grade_name) {
+                return this.setState({
+                    grade_id: item.grade_id
+                })
+            }
+        })
     }
 
     handChange = (e: any) => {
@@ -59,7 +63,8 @@ class ClassManger extends React.Component<Props> {
     }
     showModal = () => {
         this.setState({
-            visible: true
+            visible: true,
+            disabled: false
             // class: '',
             // classes: '',
             // project: ''
@@ -67,6 +72,7 @@ class ClassManger extends React.Component<Props> {
     }
 
     hideModal = () => {
+        // this.UpdateClass()
         this.AddClass()
         this.setState({
             visible: false
@@ -74,6 +80,7 @@ class ClassManger extends React.Component<Props> {
             // project: '',
             // classes: ''
         })
+        this.UpdateClass()
     }
 
     handleSubmit = (e: { preventDefault: () => void }) => {
@@ -124,29 +131,25 @@ class ClassManger extends React.Component<Props> {
         this.getList()
     }
 
-    UpdataClass = async (text: any) => {
-        let { getUpdateClass } = this.props.classmanger
-        this.state.data.map((item: any) => {
-            if (text.class === item.grade_name) {
-                // console.log(item.grade_id)
-                let result = getUpdateClass({
-                    grade_id: item.grade_id,
-                    grade_name: this.state.class,
-                    subject_id: this.state.subject_id,
-                    room_id: this.state.room_id
-                })
-                if (result.code === '1') {
-                    //添加成功后重新渲染数据
-                    // message.success(result.msg)
-                    console.log(result)
-                } else {
-                    // message.error(result.msg)
-                    console.log(result)
-                }
-            }
-        })
-    }
     componentDidMount() {
+        this.getList()
+    }
+    UpdateClass = async () => {
+        let { getUpdateClass } = this.props.classmanger
+        let resultes = await getUpdateClass({
+            grade_id: this.state.grade_id,
+            grade_name: this.state.class,
+            subject_id: this.state.subject_id,
+            room_id: this.state.room_id
+        })
+        if (resultes.code === 1) {
+            //添加成功后重新渲染数据
+            message.success(resultes.msg)
+            // console.log(resultes.msg)
+        } else {
+            message.error(resultes.msg)
+            // console.log(resultes.msg)
+        }
         this.getList()
     }
 
@@ -230,6 +233,7 @@ class ClassManger extends React.Component<Props> {
                                         ]
                                     })(
                                         <Input
+                                            disabled={this.state.disabled}
                                             placeholder="班级名"
                                             onChange={this.handChange}
                                         />
