@@ -32,7 +32,7 @@ export let getAddClasses = (params: object) => {
 
 //获取学生管理信息
 export let getStudentClass = ()=>{
-    const url ='/manger/student';
+    const url ='/manger/student/new';
     return request.get(url)
 }
 

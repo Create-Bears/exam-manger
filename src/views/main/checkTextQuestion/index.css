@@ -1,5 +1,5 @@
 * {
-    font-size: 12px;
+    font-size: 12px!important;
 }
 
 .ant-tag-blue {
@@ -71,6 +71,27 @@
     cursor: pointer;
     white-space: nowrap;
 }
+.ant-tag-blue {
+    color: #1890ff;
+    background: #e6f7ff;
+    border-color: #91d5ff;
+    font-size: 14px;
+}
+
+.ant-tag-geekblue {
+    color: #2f54eb;
+    background: #f0f5ff;
+    border-color: #adc6ff;
+    font-size: 14px;
+}
+
+.ant-tag-orange {
+    color: #fa8c16;
+    background: #fff7e6;
+    border-color: #ffd591;
+    font-size: 14px;
+}
+
 
 .ant-tag-checkable {
     background-color: transparent;
