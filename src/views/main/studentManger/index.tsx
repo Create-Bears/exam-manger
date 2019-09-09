@@ -43,6 +43,9 @@ class StudentManger extends React.Component<Props>{
     data: [],
     classList: [],
     studentClassList: [],
+    value: '',
+    classNumber: '',
+    studentClassNumber: ''
   }
   componentDidMount() {
     this.getList()
@@ -52,7 +55,7 @@ class StudentManger extends React.Component<Props>{
     let result = await getStudentClass();
     let classListData = await getClasses();
     let classMangerList = await getClassManger()
-    console.log(classMangerList)
+    console.log(result)
     result.data.map((item: any, index: number) => item.key = index)
     if (result.code === 1) {
       this.setState({
@@ -62,36 +65,99 @@ class StudentManger extends React.Component<Props>{
       })
     }
   }
+  handInput = async (e: any) => {
+    let { value } = e.target;
+    if (value) {
+      this.setState({
+        value
+      })
+    } else if (value === '') {
+      let { getStudentClass } = this.props.classmanger;
+      let result = await getStudentClass();
+      result.data.map((item: any, index: number) => item.key = index)
+      if (result.code === 1) {
+        this.setState({
+          data: result.data,
+          value: '',
+        })
+      }
+    }
+  }
+  handClick = () => {
+    console.log(this.state)
+    let { value, classNumber, studentClassNumber } = this.state;
+    if (value) {
+      let newData = this.state.data.filter((item: any) => item.student_name === value);
+      this.setState({
+        data: newData
+      })
+    } else if (classNumber) {
+      let newData = this.state.data.filter((item: any) => item.room_text === classNumber);
+      this.setState({
+        data: newData
+      })
+    } else if (studentClassNumber) {
+      let newData = this.state.data.filter((item: any) => item.grade_name === studentClassNumber);
+      this.setState({
+        data: newData
+      })
+    } else if (value && studentClassNumber) {
+      let newData = this.state.data.filter((item: any) => item.grade_name === studentClassNumber && item.student_name === value);
+      this.setState({
+        data: newData
+      })
+    } else if (value && classNumber) {
+      let newData = this.state.data.filter((item: any) => item.room_text === classNumber && item.student_name === value);
+      this.setState({
+        data: newData
+      })
+    } else if (classNumber && studentClassNumber) {
+      let newData = this.state.data.filter((item: any) => item.grade_name === studentClassNumber && item.room_text === classNumber);
+      this.setState({
+        data: newData
+      })
+    } else if (value && studentClassNumber && classNumber) {
+      let newData = this.state.data.filter((item: any) => item.grade_name === studentClassNumber && item.room_text === classNumber && item.student_name === value);
+      this.setState({
+        data: newData
+      })
+    }
+  }
+  handSelect = (obj: any) => {
+    let { type, value } = obj;
+    this.setState({
+      [type]: value
+    })
+  }
   render() {
-    let { columns, data,classList,studentClassList } = this.state;
-
+    let { columns, data, classList, studentClassList, value } = this.state;
     return (
       <div>
         <h2 className="adduser-title">学生管理</h2>
         <div>
           <div className="student-top">
             <div className="student-top-item">
-              <Input placeholder="输入学生姓名"/>
+              <Input placeholder="输入学生姓名" value={value} onChange={this.handInput} />
             </div>
             <div className="student-top-item">
-              <Select placeholder="请选择教室号" style={{ width: 160 }}>
+              <Select placeholder="请选择教室号" style={{ width: 160 }} onChange={(value) => this.handSelect({ value, type: 'classNumber' })}>
                 {
-                  classList.map((item:any,index:number)=>{
-                    return <Option key={index} value={item.room_id}>{item.room_text}</Option>
+                  classList.map((item: any, index: number) => {
+                    return <Option key={index} value={item.room_text}>{item.room_text}</Option>
                   })
                 }
               </Select>
             </div>
             <div className="student-top-item">
-              <Select placeholder="班级名" style={{ width: 160 }}>
-              {
-                  studentClassList.map((item:any,index:number)=>{
-                    return <Option key={index} value={item.grade_id}>{item.grade_name}</Option>
+              <Select placeholder="班级名" style={{ width: 160 }} onChange={(value) => this.handSelect({ value, type: 'studentClassNumber' })}>
+                {
+                  studentClassList.map((item: any, index: number) => {
+                    return <Option key={index} value={item.grade_name}>{item.grade_name}</Option>
                   })
                 }
               </Select>
             </div>
-            <div className="student-top-item"><Button className="student-btn">搜索</Button></div>
+            <div className="student-top-item"><Button className="student-btn" onClick={this.handClick}>搜索</Button></div>
             <div className="student-top-item"><Button className="student-btn">重置</Button></div>
 
           </div>
