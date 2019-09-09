@@ -15,6 +15,11 @@ export let getUpdateClass = (params: object) => {
     return request.put(url, params)
 }
 
+export let getDeleteClass = (params: object) => {
+    const url = '/manger/grade/delete'
+    return request.delete(url, { params: params })
+}
+
 export let getClasses = (params: object) => {
     const url = '/manger/room'
     return request.get(url, { params })
@@ -24,8 +29,3 @@ export let getAddClasses = (params: object) => {
     const url = '/manger/room'
     return request.post(url, params)
 }
-
-// export let getDeleteClass = (params: object) => {
-//     const url = '/manger/room/delete'
-//     return request.delete(url, params)
-// }

@@ -55,7 +55,16 @@ class ClassManger extends React.Component<Props> {
             }
         })
     }
-
+    deleteClicks = (text: any) => {
+        // this.state.data.map((item: any) => {
+        //     if (text.class === item.grade_name) {
+        //         return this.setState({
+        //             grade_id: item.grade_id
+        //         })
+        //     }
+        // })
+        this.DeleteClass()
+    }
     handChange = (e: any) => {
         this.setState({
             class: e.target.value
@@ -134,6 +143,25 @@ class ClassManger extends React.Component<Props> {
     componentDidMount() {
         this.getList()
     }
+
+    DeleteClass = async () => {
+        let { getDeleteClass } = this.props.classmanger
+        let resulte = await getDeleteClass({
+            grade_id: '4rwto7-8171yl-py8fkl-2nak7'
+        })
+        // if (resulte.code === 1) {
+        //     //添加成功后重新渲染数据
+        //     message.success(resulte.msg)
+        //     // console.log(resultes.msg)
+        // } else {
+        //     message.error(resulte.msg)
+        //     // console.log(resultes.msg)
+        // }
+        // this.getList()
+        // this.DeleteClass()
+        console.log(resulte.code)
+    }
+
     UpdateClass = async () => {
         let { getUpdateClass } = this.props.classmanger
         let resultes = await getUpdateClass({
@@ -188,7 +216,7 @@ class ClassManger extends React.Component<Props> {
                     <span>
                         <a onClick={this.updataClicks.bind(this, text)}>修改</a>
                         <Divider type="vertical" />
-                        <a>删除</a>
+                        <a onClick={this.deleteClicks.bind(this, text)}>删除</a>
                     </span>
                 )
             }
