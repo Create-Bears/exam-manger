@@ -7,7 +7,8 @@ import './index.css'
 const { Option } = Select;
 interface Props {
   question: any,
-  examManger: any
+  examManger: any,
+  history:any
 }
 
 @inject('question', 'examManger')
@@ -117,7 +118,8 @@ class ExamManage extends React.Component<Props> {
       "number": number,
     })
     if (result.code === 1) {
-      message.success(result.msg)
+      message.success(result.msg);
+      this.props.history.push('/home/addExamList')
     }
   }
   render() {

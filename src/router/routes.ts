@@ -11,6 +11,8 @@ import ClassManger from '../views/main/classManger'
 import CheckTextEditor from '../views/main/checkTextEditor'
 import ExamManage from 'src/views/main/examManage/examManage'
 import QuestionList from 'src/views/main/questionList'
+import ExamQuestionDetail from 'src/views/main/examquestiondetail'
+import AddExamList from 'src/views/main/addExamList'
 
 export default {
     routes: [
@@ -62,6 +64,12 @@ export default {
                 },{
                     component:QuestionList,
                     path:'/home/questionList'
+                },{
+                    component:ExamQuestionDetail,
+                    path:'/home/examQuestionDetail'
+                },{
+                    component:AddExamList,
+                    path:'/home/addExamList'
                 }
             ],
             component: HomePage,

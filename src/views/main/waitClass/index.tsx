@@ -59,7 +59,7 @@ class WaitClass extends React.Component<Props> {
                 projects: item.subject_text,
                 success: item.room_text[0],
                 option: item.status === '0' ? '批卷' : '',
-                key: ''
+                key: index
             }
         })
         return (
