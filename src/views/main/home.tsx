@@ -6,10 +6,9 @@ const { Header, Content, Sider } = Layout
 const { SubMenu } = Menu
 
 class HomePage extends React.Component {
-    
     render() {
         return (
-            <Layout>
+            <Layout style={{ height: '100%' }}>
                 <Sider
                     breakpoint="lg"
                     collapsedWidth="0"
@@ -63,8 +62,12 @@ class HomePage extends React.Component {
                                     用户管理
                                 </span>
                             }>
-                            <Menu.Item key="5">添加用户</Menu.Item>
-                            <Menu.Item key="6"><NavLink to='/home/usershow'>用户展示</NavLink></Menu.Item>
+                            <Menu.Item key="5">
+                                <NavLink to="/home/adduser">添加用户</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="6">
+                                <NavLink to="/home/usershow">用户展示</NavLink>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key="sub3"
@@ -74,8 +77,8 @@ class HomePage extends React.Component {
                                     考试管理
                                 </span>
                             }>
-                            <Menu.Item key="9">添加考试</Menu.Item>
-                            <Menu.Item key="10">试卷列表</Menu.Item>
+                            <Menu.Item key="9"><NavLink to="/home/examManage">添加考试</NavLink></Menu.Item>
+                            <Menu.Item key="10"><NavLink to="/home/questionList">试卷列表</NavLink></Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key="sub4"
@@ -85,7 +88,11 @@ class HomePage extends React.Component {
                                     班级管理
                                 </span>
                             }>
-                            <Menu.Item key="11">班级管理</Menu.Item>
+                            <Menu.Item key="11">
+                                <NavLink to="/home/classManger">
+                                    班级管理
+                                </NavLink>
+                            </Menu.Item>
                             <Menu.Item key="12">教室管理</Menu.Item>
                             <Menu.Item key="13">学生管理</Menu.Item>
                         </SubMenu>
@@ -97,11 +104,13 @@ class HomePage extends React.Component {
                                     阅卷管理
                                 </span>
                             }>
-                            <Menu.Item key="14">待批班级</Menu.Item>
+                            <Menu.Item key="14">
+                                <NavLink to="/home/waitClass">待批班级</NavLink>
+                            </Menu.Item>
                         </SubMenu>
                     </Menu>
                 </Sider>
-                <Layout>
+                <Layout style={{ height: '100%' }}>
                     <Header style={{ background: '#fff', padding: 0 }}>
                         <span className="user_slot">
                             <span className="user_avatar">
@@ -110,10 +119,13 @@ class HomePage extends React.Component {
                             Chenmanjie
                         </span>
                     </Header>
-                    <Content style={{ margin: '24px 16px 0' }}>
-                        <div>
-                            {this.props.children}
-                        </div>
+                    <Content
+                        style={{
+                            margin: '24px 16px 0',
+                            overflow: 'hidden',
+                            overflowY: 'scroll'
+                        }}>
+                        <div>{this.props.children}</div>
                     </Content>
                 </Layout>
             </Layout>

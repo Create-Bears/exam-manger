@@ -20,7 +20,9 @@ class CheckTextQuestion extends React.Component<Props> {
         examQuestion: [],
         examType: [],
         titleType: [],
-        current: 0
+        current: 0,
+        val: '',
+        vals: ''
     }
     clicks(ind: any) {
         this.setState({
@@ -41,7 +43,7 @@ class CheckTextQuestion extends React.Component<Props> {
         let resultList = await getQuestionExam()
         let typeList = await getQuestionsType()
         let examList = await getQuestionTypes()
-
+        console.log(result.data)
         this.setState({
             topList: result.data,
             examQuestion: resultList.data,
@@ -52,7 +54,9 @@ class CheckTextQuestion extends React.Component<Props> {
     public render() {
         return (
             <div>
-                <h1>查看试题</h1>
+                <h1 style={{ fontSize: '18px', margin: '0 0 10px 0' }}>
+                    查看试题
+                </h1>
                 <div className="ant-top">
                     <div className="row">
                         <div className="row1" style={{ fontSize: '13px' }}>
@@ -91,7 +95,15 @@ class CheckTextQuestion extends React.Component<Props> {
                     <div className="topList-b">
                         <div style={{ fontSize: '13px' }}>
                             <b>考试类型</b>:
-                            <Select defaultValue="" style={{ width: 200 }}>
+                            <Select
+                                defaultValue=""
+                                style={{ width: 200 }}
+                                onChange={(value: any) => {
+                                    // console.log(value)
+                                    this.setState({
+                                        val: value
+                                    })
+                                }}>
                                 <OptGroup label="考试类型">
                                     {this.state.examType.map(
                                         (item: any, index) => {
@@ -109,7 +121,15 @@ class CheckTextQuestion extends React.Component<Props> {
                         </div>
                         <div style={{ fontSize: '13px' }}>
                             <b>题目类型</b>:
-                            <Select defaultValue="" style={{ width: 200 }}>
+                            <Select
+                                defaultValue=""
+                                style={{ width: 200 }}
+                                onChange={(value: any) => {
+                                    // console.log(value)
+                                    this.setState({
+                                        vals: value
+                                    })
+                                }}>
                                 <OptGroup label="题目类型">
                                     {this.state.titleType.map(
                                         (item: any, index) => {
@@ -128,7 +148,30 @@ class CheckTextQuestion extends React.Component<Props> {
                             </Select>
                         </div>
                         <div>
-                            <Button type="primary" icon="search">
+                            <Button
+                                type="primary"
+                                icon="search"
+                                onClick={() => {
+                                    let examLists = this.state.examQuestion.filter(
+                                        (item: any) => {
+                                            if (
+                                                (this.state.vals ===
+                                                    item.questions_type_text &&
+                                                    this.state.val ===
+                                                        item.exam_name) ||
+                                                this.state.vals ===
+                                                    item.questions_type_text ||
+                                                this.state.val ===
+                                                    item.exam_name
+                                            ) {
+                                                return item
+                                            }
+                                        }
+                                    )
+                                    this.setState({
+                                        examQuestion: examLists
+                                    })
+                                }}>
                                 查询
                             </Button>
                         </div>
@@ -140,17 +183,16 @@ class CheckTextQuestion extends React.Component<Props> {
                         {this.state.examQuestion.map(
                             (item: any, index: number) => {
                                 return (
-                                    <div
-                                        className="antd-list-item"
-                                        key={index}
-                                        onClick={() => {
-                                            this.props.history.replace(
-                                                '/home/detail?' +
-                                                    item.questions_type_id
-                                            )
-                                            console.log(this.props)
-                                        }}>
-                                        <div className="antd-list-item-l">
+                                    <div className="antd-list-item" key={index}>
+                                        <div
+                                            className="antd-list-item-l"
+                                            onClick={() => {
+                                                this.props.history.replace(
+                                                    `/home/detail?id=${item.questions_id}`,
+                                                    { id: item.questions_id }
+                                                )
+                                                console.log(this.props)
+                                            }}>
                                             <div className="antd-list-item-l-t">
                                                 <h4
                                                     style={{
@@ -187,9 +229,18 @@ class CheckTextQuestion extends React.Component<Props> {
                                                     fontSize: '14px'
                                                 }}>
                                                 <a
-                                                    href=""
                                                     style={{
                                                         fontSize: '14px'
+                                                    }}
+                                                    onClick={() => {
+                                                        this.props.history.replace(
+                                                            `/home/checkTextEditor?id=${item.questions_id}`,
+                                                            {
+                                                                id:
+                                                                    item.questions_id
+                                                            }
+                                                        )
+                                                        console.log(this.props)
                                                     }}>
                                                     编辑
                                                 </a>
