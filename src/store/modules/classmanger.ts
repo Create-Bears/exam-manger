@@ -3,9 +3,9 @@ import {
     getClassManger, //班级管理
     getAddClass, //添加班级
     getClasses, //获取所有教室号接口
-    getAddClasses //添加教室号接口
-    // getDeleteClass, //删除班级
-    // getUpdateClass //更新班级
+    getAddClasses, //添加教室号接口
+    getDeleteClass, //删除班级
+    getUpdateClass //更新班级
 } from '../../service/index'
 
 class Question {
@@ -28,14 +28,15 @@ class Question {
         let result: any = await getAddClasses(params)
         return result
     }
-    // async getDeleteClass(params: any): Promise<any> {
-    // let result: any = await getDeleteClass(params)
-    // return result
-    // }
-    // async getUpdateClass(params: any): Promise<any> {
-    // let result: any = await getUpdateClass(params)
-    // return result
-    // }
+    async getDeleteClass(params: any): Promise<any> {
+        let result: any = await getDeleteClass(params)
+        return result
+    }
+
+    async getUpdateClass(params: any): Promise<any> {
+        let result: any = await getUpdateClass(params)
+        return result
+    }
 }
 
 export default Question
