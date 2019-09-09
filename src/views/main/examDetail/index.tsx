@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Table } from 'antd'
+import { Table, Select } from 'antd'
 
 interface Props {
     question: any
@@ -12,6 +12,7 @@ interface Props {
 class ExamDetail extends React.Component<Props> {
     state = {
         data: [],
+        status: ['未阅', '已阅'],
         columns: [
             {
                 title: '班级名',
@@ -57,6 +58,12 @@ class ExamDetail extends React.Component<Props> {
             data: result.data
         })
     }
+    handleChange(value: any) {
+        console.log(`Selected: ${value}`)
+    }
+    handleChanges(value: any) {
+        console.log(`Selected: ${value}`)
+    }
     public render() {
         console.log(this.state.data)
         const data = this.state.data.map((item: any, index) => {
@@ -71,9 +78,26 @@ class ExamDetail extends React.Component<Props> {
         })
         return (
             <div>
-                <h1 style={{ fontSize: '18px', margin: '0 0 10px 0' }}>
-                    待批班级
-                </h1>
+                <div>
+                    <span>状态</span>
+                    <Select
+                        defaultValue=""
+                        onChange={this.handleChange}
+                        style={{ width: 200 }}>
+                        {this.state.status}
+                    </Select>
+                </div>
+                <div>
+                    <span>班级</span>
+                    <Select
+                        defaultValue=""
+                        onChange={this.handleChanges}
+                        style={{ width: 200 }}>
+                        {this.state.data.map((item: any) => {
+                            return item.grade_item
+                        })}
+                    </Select>
+                </div>
                 <Table
                     columns={this.state.columns}
                     dataSource={data}

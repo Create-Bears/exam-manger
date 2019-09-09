@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import './index.css'
 import { Layout, Select, Button } from 'antd'
+import './index.css'
 const { Option, OptGroup } = Select
 
 interface Props {

@@ -5,6 +5,7 @@ import { Table } from 'antd'
 interface Props {
     question: any
     classmanger: any
+    history: any
 }
 
 @inject('question', 'classmanger')
@@ -38,14 +39,19 @@ class WaitClass extends React.Component<Props> {
                 dataIndex: 'option',
                 render: (text: any, record: any) => (
                     <span>
-                        <a onClick={this.examDetail.bind(this, text)}>批卷</a>
+                        <a
+                            onClick={() => {
+                                this.props.history.push(
+                                    '/home/examDetail/?id=' + record.class
+                                )
+                                console.log(record)
+                            }}>
+                            批卷
+                        </a>
                     </span>
                 )
             }
         ]
-    }
-    examDetail(text: any) {
-        console.log(text, this.props)
     }
     componentDidMount() {
         this.getList()
@@ -71,9 +77,6 @@ class WaitClass extends React.Component<Props> {
         })
         return (
             <div>
-                <h1 style={{ fontSize: '18px', margin: '0 0 10px 0' }}>
-                    待批班级
-                </h1>
                 <Table
                     columns={this.state.columns}
                     dataSource={data}

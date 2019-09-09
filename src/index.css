@@ -4,16 +4,18 @@ body {
     font-family: sans-serif;
 }
 
-.ant-layout,.ant-layout-has-sider{
+.ant-layout, .ant-layout-has-sider {
     height: 100%!important;
 }
 
-.ant-layout-sider,.ant-layout-sider-dark{
+.ant-layout-sider, .ant-layout-sider-dark {
     height: 100%!important;
 }
-.ant-layout-sider-children{
+
+.ant-layout-sider-children {
     height: 100%!important;
 }
+
 .user_slot {
     height: 64px;
     display: flex;
