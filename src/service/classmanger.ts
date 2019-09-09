@@ -35,3 +35,8 @@ export let getStudentClass = ()=>{
     const url ='/manger/student';
     return request.get(url)
 }
+
+export let getDeleteClasses = (params: object) => {
+    const url = '/manger/room/delete'
+    return request.delete(url, { data: params })
+}

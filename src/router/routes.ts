@@ -15,6 +15,8 @@ import ExamQuestionDetail from 'src/views/main/examquestiondetail'
 import AddExamList from 'src/views/main/addExamList'
 import StudentManger from '@/views/main/studentManger'
 
+import ClassRoomer from '../views/main/classRoomer'
+import ExamDetail from '../views/main/examDetail'
 export default {
     routes: [
         {
@@ -40,8 +42,16 @@ export default {
                     path: '/home/classManger'
                 },
                 {
+                    component: ClassRoomer,
+                    path: '/home/classRoomer'
+                },
+                {
                     component: CheckTextEditor,
                     path: '/home/checkTextEditor/:id?'
+                },
+                {
+                    component: ExamDetail,
+                    path: '/home/examDetail/:id?'
                 },
                 {
                     component: WaitClass,

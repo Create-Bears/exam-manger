@@ -77,8 +77,16 @@ class HomePage extends React.Component {
                                     考试管理
                                 </span>
                             }>
-                            <Menu.Item key="9"><NavLink to="/home/examManage">添加考试</NavLink></Menu.Item>
-                            <Menu.Item key="10"><NavLink to="/home/questionList">试卷列表</NavLink></Menu.Item>
+                            <Menu.Item key="9">
+                                <NavLink to="/home/examManage">
+                                    添加考试
+                                </NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="10">
+                                <NavLink to="/home/questionList">
+                                    试卷列表
+                                </NavLink>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key="sub4"
@@ -93,8 +101,17 @@ class HomePage extends React.Component {
                                     班级管理
                                 </NavLink>
                             </Menu.Item>
+<<<<<<< HEAD
                             <Menu.Item key="12">教室管理</Menu.Item>
                             <Menu.Item key="13"><NavLink to="/home/studentManger">学生管理</NavLink></Menu.Item>
+=======
+                            <Menu.Item key="12">
+                                <NavLink to="/home/classRoomer">
+                                    教室管理
+                                </NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="13">学生管理</Menu.Item>
+>>>>>>> 4a83fdc6398e8268d858da3a27b0f62b5f6b3d10
                         </SubMenu>
                         <SubMenu
                             key="sub5"
