@@ -1,6 +1,6 @@
 import Login from '../views/Login'
 import AddList from '../views/main/addList'
-import CheckTextQuestion from '../views/main/checkTextQuestion'
+import CheckTextQuestion from '@/views/main/checkTextQuestion'
 import TextQuestion from '../views/main/textQuestion'
 import Detail from '../views/main/detail'
 import WaitClass from '../views/main/waitClass'
@@ -13,6 +13,7 @@ import ExamManage from 'src/views/main/examManage/examManage'
 import QuestionList from 'src/views/main/questionList'
 import ExamQuestionDetail from 'src/views/main/examquestiondetail'
 import AddExamList from 'src/views/main/addExamList'
+import StudentManger from '@/views/main/studentManger'
 
 export default {
     routes: [
@@ -70,6 +71,9 @@ export default {
                 },{
                     component:AddExamList,
                     path:'/home/addExamList'
+                },{
+                    component:StudentManger,
+                    path:'/home/studentManger'
                 }
             ],
             component: HomePage,

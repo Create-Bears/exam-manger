@@ -17,7 +17,7 @@ export let getUpdateClass = (params: object) => {
 
 export let getDeleteClass = (params: object) => {
     const url = '/manger/grade/delete'
-    return request.delete(url, { params: params })
+    return request.delete(url, { data: params })
 }
 
 export let getClasses = (params: object) => {
@@ -28,4 +28,10 @@ export let getClasses = (params: object) => {
 export let getAddClasses = (params: object) => {
     const url = '/manger/room'
     return request.post(url, params)
+}
+
+//获取学生管理信息
+export let getStudentClass = ()=>{
+    const url ='/manger/student';
+    return request.get(url)
 }

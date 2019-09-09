@@ -5,7 +5,8 @@ import {
     getClasses, //获取所有教室号接口
     getAddClasses, //添加教室号接口
     getDeleteClass, //删除班级
-    getUpdateClass //更新班级
+    getUpdateClass, //更新班级
+    getStudentClass //获取学生班级信息
 } from '../../service/index'
 
 class Question {
@@ -35,6 +36,10 @@ class Question {
 
     async getUpdateClass(params: any): Promise<any> {
         let result: any = await getUpdateClass(params)
+        return result
+    }
+    async getStudentClass():Promise<any>{
+        let result:any=await getStudentClass();
         return result
     }
 }

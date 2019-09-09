@@ -14,7 +14,8 @@
           "import-sources-order": "lowercase-last",
           "named-imports-order": "lowercase-first"
       }
-    ]
+    ],
+    "no-implicit-dependencies": ["optional", ["src"]]
   },
   "linterOptions": {
     "exclude": [

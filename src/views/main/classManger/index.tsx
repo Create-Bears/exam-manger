@@ -17,7 +17,7 @@ interface Props {
     classmanger: any
     data: any
     question: any
-    form: any
+    form: any,
 }
 
 @inject('classmanger', 'question')
@@ -55,15 +55,26 @@ class ClassManger extends React.Component<Props> {
             }
         })
     }
-    deleteClicks = (text: any) => {
-        // this.state.data.map((item: any) => {
-        //     if (text.class === item.grade_name) {
-        //         return this.setState({
-        //             grade_id: item.grade_id
-        //         })
-        //     }
-        // })
-        this.DeleteClass()
+    deleteClicks = (index: any) => {
+        let {grade_id} = this.state.data[index]
+        this.setState({
+            grade_id
+        },()=>{
+            this.DeleteClass()
+        })
+    }
+    DeleteClass = async () => {
+        let { getDeleteClass } = this.props.classmanger
+        let resulte = await getDeleteClass({
+            grade_id: this.state.grade_id
+        })
+        if (resulte.code === 1) {
+            //添加成功后重新渲染数据
+            message.success(resulte.msg)
+        } else {
+            message.error(resulte.msg)
+        }
+        this.getList()
     }
     handChange = (e: any) => {
         this.setState({
@@ -74,9 +85,6 @@ class ClassManger extends React.Component<Props> {
         this.setState({
             visible: true,
             disabled: false
-            // class: '',
-            // classes: '',
-            // project: ''
         })
     }
 
@@ -85,9 +93,6 @@ class ClassManger extends React.Component<Props> {
         this.AddClass()
         this.setState({
             visible: false
-            // class: '',
-            // project: '',
-            // classes: ''
         })
         this.UpdateClass()
     }
@@ -144,23 +149,7 @@ class ClassManger extends React.Component<Props> {
         this.getList()
     }
 
-    DeleteClass = async () => {
-        let { getDeleteClass } = this.props.classmanger
-        let resulte = await getDeleteClass({
-            grade_id: '4rwto7-8171yl-py8fkl-2nak7'
-        })
-        // if (resulte.code === 1) {
-        //     //添加成功后重新渲染数据
-        //     message.success(resulte.msg)
-        //     // console.log(resultes.msg)
-        // } else {
-        //     message.error(resulte.msg)
-        //     // console.log(resultes.msg)
-        // }
-        // this.getList()
-        // this.DeleteClass()
-        console.log(resulte.code)
-    }
+   
 
     UpdateClass = async () => {
         let { getUpdateClass } = this.props.classmanger
@@ -192,7 +181,6 @@ class ClassManger extends React.Component<Props> {
             subject: projects.data,
             data: result.data
         })
-        // console.log(this.state.data)
     }
     public render() {
         const { getFieldDecorator } = this.props.form
@@ -216,7 +204,7 @@ class ClassManger extends React.Component<Props> {
                     <span>
                         <a onClick={this.updataClicks.bind(this, text)}>修改</a>
                         <Divider type="vertical" />
-                        <a onClick={this.deleteClicks.bind(this, text)}>删除</a>
+                        <a onClick={this.deleteClicks.bind(this, record.key)}>删除</a>
                     </span>
                 )
             }

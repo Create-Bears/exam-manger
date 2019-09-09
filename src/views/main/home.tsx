@@ -94,7 +94,7 @@ class HomePage extends React.Component {
                                 </NavLink>
                             </Menu.Item>
                             <Menu.Item key="12">教室管理</Menu.Item>
-                            <Menu.Item key="13">学生管理</Menu.Item>
+                            <Menu.Item key="13"><NavLink to="/home/studentManger">学生管理</NavLink></Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key="sub5"

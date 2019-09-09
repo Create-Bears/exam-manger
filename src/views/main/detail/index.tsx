@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import './index.css'
+const ReactMarkdown = require('react-markdown')
 
 interface Props {
     question: any
@@ -57,11 +58,12 @@ class Detail extends React.Component<Props> {
                                     </div>
                                 </div>
                                 <h4>{item.title}</h4>
-                                <div>{item.questions_stem}</div>
+                                <ReactMarkdown source={item.questions_stem} />
+                                <ReactMarkdown source={item.questions_answer} />
                             </div>
                             <div className="right">
                                 <h3>答题信息</h3>
-                                <div>{item.questions_answer}</div>
+                                <ReactMarkdown source={item.questions_answer} />
                             </div>
                         </div>
                     ) : (
