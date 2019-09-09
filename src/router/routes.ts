@@ -14,7 +14,7 @@ import QuestionList from 'src/views/main/questionList'
 import ExamQuestionDetail from 'src/views/main/examquestiondetail'
 import AddExamList from 'src/views/main/addExamList'
 import ClassRoomer from '../views/main/classRoomer'
-
+import ExamDetail from '../views/main/examDetail'
 export default {
     routes: [
         {
@@ -46,6 +46,10 @@ export default {
                 {
                     component: CheckTextEditor,
                     path: '/home/checkTextEditor/:id?'
+                },
+                {
+                    component: ExamDetail,
+                    path: '/home/examDetail/:id?'
                 },
                 {
                     component: WaitClass,

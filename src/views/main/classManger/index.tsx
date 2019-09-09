@@ -34,36 +34,36 @@ class ClassManger extends React.Component<Props> {
         classes: '',
         project: '',
         grade_id: '',
+        grade_name: '',
         disabled: false
     }
 
-    updataClicks = (text: any) => {
-        this.showModal()
-        this.setState({
-            disabled: true
-        })
+    updataClicks = async (text: any) => {
         this.props.form.setFieldsValue({
             class: text.class,
             classes: text.classes,
             project: text.project
         })
-        this.state.data.map((item: any) => {
-            if (text.class === item.grade_name) {
-                return this.setState({
-                    grade_id: item.grade_id
-                })
-            }
+        this.showModal()
+        this.setState({
+            disabled: true
         })
-    }
-    deleteClicks = (text: any) => {
-        // this.state.data.map((item: any) => {
-        //     if (text.class === item.grade_name) {
-        //         return this.setState({
-        //             grade_id: item.grade_id
-        //         })
-        //     }
-        // })
-        this.DeleteClass()
+        const { grade_id, grade_name } = this.state.data[text.key]
+        this.setState({
+            grade_id: grade_id,
+            grade_name: grade_name
+        })
+        let { getUpdateClass } = this.props.classmanger
+        let resultes = await getUpdateClass({
+            grade_id: grade_id,
+            grade_name: grade_name,
+            subject_id: this.state.subject_id,
+            room_id: this.state.room_id
+        })
+        if (resultes.code === 1) {
+            message.success(resultes.msg)
+        }
+        this.getList()
     }
     handChange = (e: any) => {
         this.setState({
@@ -74,22 +74,14 @@ class ClassManger extends React.Component<Props> {
         this.setState({
             visible: true,
             disabled: false
-            // class: '',
-            // classes: '',
-            // project: ''
         })
     }
 
     hideModal = () => {
-        // this.UpdateClass()
         this.AddClass()
         this.setState({
             visible: false
-            // class: '',
-            // project: '',
-            // classes: ''
         })
-        this.UpdateClass()
     }
 
     handleSubmit = (e: { preventDefault: () => void }) => {
@@ -139,45 +131,7 @@ class ClassManger extends React.Component<Props> {
         }
         this.getList()
     }
-
     componentDidMount() {
-        this.getList()
-    }
-
-    DeleteClass = async () => {
-        let { getDeleteClass } = this.props.classmanger
-        let resulte = await getDeleteClass({
-            grade_id: '4rwto7-8171yl-py8fkl-2nak7'
-        })
-        // if (resulte.code === 1) {
-        //     //添加成功后重新渲染数据
-        //     message.success(resulte.msg)
-        //     // console.log(resultes.msg)
-        // } else {
-        //     message.error(resulte.msg)
-        //     // console.log(resultes.msg)
-        // }
-        // this.getList()
-        // this.DeleteClass()
-        console.log(resulte.code)
-    }
-
-    UpdateClass = async () => {
-        let { getUpdateClass } = this.props.classmanger
-        let resultes = await getUpdateClass({
-            grade_id: this.state.grade_id,
-            grade_name: this.state.class,
-            subject_id: this.state.subject_id,
-            room_id: this.state.room_id
-        })
-        if (resultes.code === 1) {
-            //添加成功后重新渲染数据
-            message.success(resultes.msg)
-            // console.log(resultes.msg)
-        } else {
-            message.error(resultes.msg)
-            // console.log(resultes.msg)
-        }
         this.getList()
     }
 
@@ -216,19 +170,21 @@ class ClassManger extends React.Component<Props> {
                     <span>
                         <a onClick={this.updataClicks.bind(this, text)}>修改</a>
                         <Divider type="vertical" />
-                        <a onClick={this.deleteClicks.bind(this, text)}>删除</a>
+                        <a>删除</a>
                     </span>
                 )
             }
         ]
-        const data = this.state.data.map((item: any, index) => {
-            return {
-                key: index,
-                class: item.grade_name,
-                project: item.subject_text,
-                classes: item.room_text
-            }
-        })
+        const data =
+            this.state.data &&
+            this.state.data.map((item: any, index) => {
+                return {
+                    key: index,
+                    class: item.grade_name,
+                    project: item.subject_text,
+                    classes: item.room_text
+                }
+            })
         return (
             <div>
                 <h1 style={{ fontSize: '18px', margin: '0 0 10px 0' }}>
@@ -280,19 +236,23 @@ class ClassManger extends React.Component<Props> {
                                         <Select
                                             placeholder="请选择你的教室号"
                                             onChange={this.handleSelectChanges}>
-                                            {this.state.classroom.map(
-                                                (item: any, index: number) => {
-                                                    return (
-                                                        <Option
-                                                            value={
-                                                                item.room_text
-                                                            }
-                                                            key={index}>
-                                                            {item.room_text}
-                                                        </Option>
-                                                    )
-                                                }
-                                            )}
+                                            {this.state.classroom &&
+                                                this.state.classroom.map(
+                                                    (
+                                                        item: any,
+                                                        index: number
+                                                    ) => {
+                                                        return (
+                                                            <Option
+                                                                value={
+                                                                    item.room_text
+                                                                }
+                                                                key={index}>
+                                                                {item.room_text}
+                                                            </Option>
+                                                        )
+                                                    }
+                                                )}
                                         </Select>
                                     )}
                                 </Form.Item>
@@ -309,19 +269,25 @@ class ClassManger extends React.Component<Props> {
                                         <Select
                                             placeholder="请选择你的课程名"
                                             onChange={this.handleSelectChange}>
-                                            {this.state.subject.map(
-                                                (item: any, index: number) => {
-                                                    return (
-                                                        <Option
-                                                            value={
-                                                                item.subject_text
-                                                            }
-                                                            key={index}>
-                                                            {item.subject_text}
-                                                        </Option>
-                                                    )
-                                                }
-                                            )}
+                                            {this.state.subject &&
+                                                this.state.subject.map(
+                                                    (
+                                                        item: any,
+                                                        index: number
+                                                    ) => {
+                                                        return (
+                                                            <Option
+                                                                value={
+                                                                    item.subject_text
+                                                                }
+                                                                key={index}>
+                                                                {
+                                                                    item.subject_text
+                                                                }
+                                                            </Option>
+                                                        )
+                                                    }
+                                                )}
                                         </Select>
                                     )}
                                 </Form.Item>

@@ -9,7 +9,7 @@ interface Props {
 
 @inject('question', 'classmanger')
 @observer
-class WaitClass extends React.Component<Props> {
+class ExamDetail extends React.Component<Props> {
     state = {
         data: [],
         columns: [
@@ -84,4 +84,4 @@ class WaitClass extends React.Component<Props> {
     }
 }
 
-export default WaitClass
+export default ExamDetail
