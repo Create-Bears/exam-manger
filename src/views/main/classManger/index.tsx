@@ -1,15 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import {
-    Table,
-    Divider,
-    Button,
-    Modal,
-    Form,
-    Select,
-    Input,
-    message
-} from 'antd'
+import { Table, Divider, Button, Modal, Form, Select, Input } from 'antd'
 const { Option } = Select
 interface Props {
     age: number
@@ -32,50 +23,20 @@ class ClassManger extends React.Component<Props> {
         vals: '',
         val: '',
         subject_id: '',
-        room_id: '',
-        visible: false,
-        class: '',
-        classes: '',
-        project: '',
-        grade_id: ''
+        visible: false
     }
 
-    updataClicks = (text: any) => {
-        this.setState({
-            visible: true
-        })
-        this.props.form.setFieldsValue({
-            class: text.class,
-            classes: text.classes,
-            project: text.project
-        })
-        this.UpdataClass(text)
-    }
-
-    handChange = (e: any) => {
-        this.setState({
-            class: e.target.value
-        })
-    }
     showModal = () => {
         this.setState({
             visible: true
-            // class: '',
-            // classes: '',
-            // project: ''
         })
     }
 
     hideModal = () => {
-        this.AddClass()
         this.setState({
             visible: false
-            // class: '',
-            // project: '',
-            // classes: ''
         })
     }
-
     handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         this.props.form.validateFields((err: any, values: any) => {
@@ -85,84 +46,13 @@ class ClassManger extends React.Component<Props> {
         })
     }
 
-    handleSelectChange = (value: any) => {
-        this.state.subject.map((item: any) => {
-            if (value === item.subject_text) {
-                return this.setState({
-                    project: value,
-                    subject_id: item.subject_id
-                })
-            }
+    handleSelectChange = (value: string) => {
+        console.log(value)
+        this.props.form.setFieldsValue({
+            note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`
         })
     }
 
-    handleSelectChanges = (value: any) => {
-        this.state.classroom.map((item: any) => {
-            if (value === item.room_text) {
-                return this.setState({
-                    classes: value,
-                    room_id: item.room_id
-                })
-            }
-        })
-    }
-
-    //调用mobx 发起axios请求 添加班级接口
-    AddClass = async () => {
-        let { getAddClass } = this.props.classmanger
-        let result = await getAddClass({
-            grade_name: this.state.class,
-            subject_id: this.state.subject_id,
-            room_id: this.state.room_id
-        })
-        if (result.code === 1) {
-            //添加成功后重新渲染数据
-            message.success(result.msg)
-        } else {
-            message.error(result.msg)
-        }
-        this.getList()
-    }
-
-    UpdataClass = async (text: any) => {
-        let { getUpdateClass } = this.props.classmanger
-        this.state.data.map((item: any) => {
-            if (text.class === item.grade_name) {
-                // console.log(item.grade_id)
-                let result = getUpdateClass({
-                    grade_id: item.grade_id,
-                    grade_name: this.state.class,
-                    subject_id: this.state.subject_id,
-                    room_id: this.state.room_id
-                })
-                if (result.code === '1') {
-                    //添加成功后重新渲染数据
-                    // message.success(result.msg)
-                    console.log(result)
-                } else {
-                    // message.error(result.msg)
-                    console.log(result)
-                }
-            }
-        })
-    }
-    componentDidMount() {
-        this.getList()
-    }
-
-    getList = async () => {
-        const { getClassManger, getClasses } = this.props.classmanger
-        const { getQuestionSubject } = this.props.question
-        let result = await getClassManger()
-        let projects = await getQuestionSubject()
-        let results = await getClasses()
-        this.setState({
-            classroom: results.data,
-            subject: projects.data,
-            data: result.data
-        })
-        // console.log(this.state.data)
-    }
     public render() {
         const { getFieldDecorator } = this.props.form
         const columns = [
@@ -183,7 +73,15 @@ class ClassManger extends React.Component<Props> {
                 key: 'action',
                 render: (text: any, record: any) => (
                     <span>
-                        <a onClick={this.updataClicks.bind(this, text)}>修改</a>
+                        <a
+                            onClick={() => {
+                                console.log(text, record)
+                                this.setState({
+                                    names: text.class
+                                })
+                            }}>
+                            修改
+                        </a>
                         <Divider type="vertical" />
                         <a>删除</a>
                     </span>
@@ -206,10 +104,10 @@ class ClassManger extends React.Component<Props> {
                 <div className="content">
                     <div style={{ marginBottom: '10px' }}>
                         <Button type="primary" onClick={this.showModal}>
-                            +添加班级
+                            Modal
                         </Button>
                         <Modal
-                            title="创建班级"
+                            title="+添加班级"
                             visible={this.state.visible}
                             onOk={this.hideModal}
                             onCancel={this.hideModal}
@@ -219,77 +117,34 @@ class ClassManger extends React.Component<Props> {
                                 labelCol={{ span: 5 }}
                                 wrapperCol={{ span: 12 }}
                                 onSubmit={this.handleSubmit}>
-                                <Form.Item label="班级名">
-                                    {getFieldDecorator('class', {
+                                <Form.Item label="Note">
+                                    {getFieldDecorator('note', {
                                         rules: [
                                             {
                                                 required: true,
                                                 message:
-                                                    'Please input your classname!'
+                                                    'Please input your note!'
                                             }
                                         ]
-                                    })(
-                                        <Input
-                                            placeholder="班级名"
-                                            onChange={this.handChange}
-                                        />
-                                    )}
+                                    })(<Input />)}
                                 </Form.Item>
-                                <Form.Item label="教室号">
-                                    {getFieldDecorator('classes', {
+                                <Form.Item label="Gender">
+                                    {getFieldDecorator('gender', {
                                         rules: [
                                             {
                                                 required: true,
                                                 message:
-                                                    'Please select your classes!'
+                                                    'Please select your gender!'
                                             }
                                         ]
                                     })(
                                         <Select
-                                            placeholder="请选择你的教室号"
-                                            onChange={this.handleSelectChanges}>
-                                            {this.state.classroom.map(
-                                                (item: any, index: number) => {
-                                                    return (
-                                                        <Option
-                                                            value={
-                                                                item.room_text
-                                                            }
-                                                            key={index}>
-                                                            {item.room_text}
-                                                        </Option>
-                                                    )
-                                                }
-                                            )}
-                                        </Select>
-                                    )}
-                                </Form.Item>
-                                <Form.Item label="课程名">
-                                    {getFieldDecorator('project', {
-                                        rules: [
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please select your project!'
-                                            }
-                                        ]
-                                    })(
-                                        <Select
-                                            placeholder="请选择你的课程名"
+                                            placeholder="Select a option and change input text above"
                                             onChange={this.handleSelectChange}>
-                                            {this.state.subject.map(
-                                                (item: any, index: number) => {
-                                                    return (
-                                                        <Option
-                                                            value={
-                                                                item.subject_text
-                                                            }
-                                                            key={index}>
-                                                            {item.subject_text}
-                                                        </Option>
-                                                    )
-                                                }
-                                            )}
+                                            <Option value="male">male</Option>
+                                            <Option value="female">
+                                                female
+                                            </Option>
                                         </Select>
                                     )}
                                 </Form.Item>

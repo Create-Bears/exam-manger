@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import './index.css'
-import {Table} from 'antd'
+import { Table } from 'antd'
 
 
 interface Props {
-    userShow: any,
-    userList: any
+  userShow: any,
+  userList: any
 }
 
 @inject('userShow')

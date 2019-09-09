@@ -1,7 +1,4 @@
 import { observable, action } from 'mobx'
-<<<<<<< HEAD
-import { getUser } from '../../service/index'
-=======
 import { 
     getUser,
     getIdentity,
@@ -16,7 +13,6 @@ import {
     setViewIdentity,
     updataUser
 } from '../../service/index'
->>>>>>> yYun
 
 class UserShow {
     @observable userList: Array<object> = [
@@ -45,10 +41,6 @@ class UserShow {
             id: 6
         }
     ]
-<<<<<<< HEAD
-    @action async getUser(): Promise<any> {
-        let result: any = await getUser();
-=======
 
     @action async getUser(url:string): Promise<any> {
         let result: any = await getUser(url);
@@ -80,13 +72,10 @@ class UserShow {
     //获取已有视图数据
     @action async getUserApiView():Promise<any>{
         let result :any =await getUserApiView();
->>>>>>> yYun
         if (result.code === 1) {
             return result.data
         }
     }
-<<<<<<< HEAD
-=======
     //获取添加用户接口返回给数据
     @action async getAddUser(params:object){
         let result:any = await getAddUser(params);
@@ -122,7 +111,6 @@ class UserShow {
         let result:any=await updataUser(params);
         return result
     }
->>>>>>> yYun
 }
 
 export default UserShow

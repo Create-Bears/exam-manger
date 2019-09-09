@@ -1,10 +1,5 @@
 import request from '../utils/request'
 
-<<<<<<< HEAD
-export let getUser = () => {
-    const url = '/user/user';
-    return request.get(url)
-=======
 export let getUser = (url:string) => {
   return request.get(url)
 }
@@ -82,5 +77,4 @@ export let setViewIdentity = (params: object) => {
 export let updataUser = (params:object)=>{
   const url ='/user/user';
   return request.put(url,params)
->>>>>>> yYun
 }
