@@ -52,12 +52,12 @@ class WaitClass extends React.Component<Props> {
         console.log(this.state.data)
         const data = this.state.data.map((item: any, index) => {
             return {
-                class: item.grade_name[0],
+                class: item.grade_name,
                 project: item.subject_text,
                 name: item.questions_type_text,
                 status: item.status === '0' ? '未阅' : '已阅',
                 projects: item.subject_text,
-                success: item.room_text[0],
+                success: item.room_text,
                 option: item.status === '0' ? '批卷' : '',
                 key: index
             }

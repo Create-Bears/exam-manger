@@ -13,6 +13,7 @@ import ExamManage from 'src/views/main/examManage/examManage'
 import QuestionList from 'src/views/main/questionList'
 import ExamQuestionDetail from 'src/views/main/examquestiondetail'
 import AddExamList from 'src/views/main/addExamList'
+import ClassRoomer from '../views/main/classRoomer'
 
 export default {
     routes: [
@@ -39,6 +40,10 @@ export default {
                     path: '/home/classManger'
                 },
                 {
+                    component: ClassRoomer,
+                    path: '/home/classRoomer'
+                },
+                {
                     component: CheckTextEditor,
                     path: '/home/checkTextEditor/:id?'
                 },
@@ -59,17 +64,20 @@ export default {
                     path: '/home/adduser'
                 },
                 {
-                    component:ExamManage,
-                    path:'/home/examManage'
-                },{
-                    component:QuestionList,
-                    path:'/home/questionList'
-                },{
-                    component:ExamQuestionDetail,
-                    path:'/home/examQuestionDetail'
-                },{
-                    component:AddExamList,
-                    path:'/home/addExamList'
+                    component: ExamManage,
+                    path: '/home/examManage'
+                },
+                {
+                    component: QuestionList,
+                    path: '/home/questionList'
+                },
+                {
+                    component: ExamQuestionDetail,
+                    path: '/home/examQuestionDetail'
+                },
+                {
+                    component: AddExamList,
+                    path: '/home/addExamList'
                 }
             ],
             component: HomePage,

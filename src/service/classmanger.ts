@@ -29,3 +29,8 @@ export let getAddClasses = (params: object) => {
     const url = '/manger/room'
     return request.post(url, params)
 }
+
+export let getDeleteClasses = (params: object) => {
+    const url = '/manger/room/delete'
+    return request.delete(url, { data: params })
+}
