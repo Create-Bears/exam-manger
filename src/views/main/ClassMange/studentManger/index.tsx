@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Select, Button, Table, Input } from 'antd'
+import { Select, Button, Table, Input, message } from 'antd'
 import { inject, observer } from 'mobx-react'
 import './index.css'
 
@@ -37,7 +37,7 @@ class StudentManger extends React.Component<Props>{
       {
         title: '操作',
         dataIndex: 'index',
-        render: () => <a>删除</a>
+        render: (text: any, record: any) => <a onClick={() => { this.handDelete(record.key) }}>删除</a>
       },
     ],
     data: [],
@@ -45,10 +45,27 @@ class StudentManger extends React.Component<Props>{
     studentClassList: [],
     value: '',
     classNumber: '',
-    studentClassNumber: ''
+    studentClassNumber: '',
+    student_id: '',
   }
   componentDidMount() {
     this.getList()
+  }
+  handDelete = (index: any) => {
+    console.log(index)
+    let { student_id } = this.state.data[index];
+    this.setState({
+      student_id
+    }, async () => {
+      let { studentDelet } = this.props.classmanger;
+      let result = await studentDelet(this.state.student_id)
+      console.log(result)
+      if (result.code === 1) {
+        message.success(result.msg);
+        this.getList();
+      }
+    })
+
   }
   getList = async () => {
     let { getStudentClass, getClasses, getClassManger } = this.props.classmanger;
@@ -129,8 +146,17 @@ class StudentManger extends React.Component<Props>{
       [type]: value
     })
   }
+  handDeleteValue = () => {
+    this.setState({
+      value: '',
+      classNumber: '',
+      studentClassNumber: '',
+    },()=>{
+      console.log(this.state)
+    })
+  }
   render() {
-    let { columns, data, classList, studentClassList, value } = this.state;
+    let { columns, data, classList, studentClassList, value ,classNumber,studentClassNumber} = this.state;
     return (
       <div>
         <h2 className="adduser-title">学生管理</h2>
@@ -140,7 +166,7 @@ class StudentManger extends React.Component<Props>{
               <Input placeholder="输入学生姓名" value={value} onChange={this.handInput} />
             </div>
             <div className="student-top-item">
-              <Select placeholder="请选择教室号" style={{ width: 160 }} onChange={(value) => this.handSelect({ value, type: 'classNumber' })}>
+              <Select placeholder="请选择教室号" defaultValue={classNumber} style={{ width: 160 }} onChange={(value:any) => this.handSelect({ value, type: 'classNumber' })}>
                 {
                   classList.map((item: any, index: number) => {
                     return <Option key={index} value={item.room_text}>{item.room_text}</Option>
@@ -149,7 +175,7 @@ class StudentManger extends React.Component<Props>{
               </Select>
             </div>
             <div className="student-top-item">
-              <Select placeholder="班级名" style={{ width: 160 }} onChange={(value) => this.handSelect({ value, type: 'studentClassNumber' })}>
+              <Select placeholder="班级名" defaultValue={studentClassNumber} style={{ width: 160 }} onChange={(value:any) => this.handSelect({ value, type: 'studentClassNumber' })}>
                 {
                   studentClassList.map((item: any, index: number) => {
                     return <Option key={index} value={item.grade_name}>{item.grade_name}</Option>
@@ -158,7 +184,7 @@ class StudentManger extends React.Component<Props>{
               </Select>
             </div>
             <div className="student-top-item"><Button className="student-btn" onClick={this.handClick}>搜索</Button></div>
-            <div className="student-top-item"><Button className="student-btn">重置</Button></div>
+            <div className="student-top-item"><Button className="student-btn" onClick={this.handDeleteValue}>重置</Button></div>
 
           </div>
           <div className="student-bottom">

@@ -40,3 +40,9 @@ export let getDeleteClasses = (params: object) => {
     const url = '/manger/room/delete'
     return request.delete(url, { data: params })
 }
+
+// 删除学生接口
+export let studentDelet = (id:any)=>{
+    const url = `/manger/student/${id}`;
+    return request.delete(url)
+}

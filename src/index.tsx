@@ -17,13 +17,16 @@ import { Router } from 'react-router'
 import { createBrowserHistory } from 'history'
 
 //引入路由守卫
-import guard from './utils/permission'
+import guard ,{filterView} from './utils/permission'
 const history = createBrowserHistory()
+
+const myRoutes = filterView(routes, store.user.viewAuthority);
+console.log('myRoutes...', myRoutes, routes);
 
 ReactDOM.render(
 	<Provider {...store}>
 		<Router history={history}>
-			<RouterView routes={routes.routes} />
+			<RouterView routes={myRoutes} />
 		</Router>
 	</Provider>
 	,

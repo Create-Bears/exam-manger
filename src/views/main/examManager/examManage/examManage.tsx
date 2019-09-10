@@ -159,8 +159,8 @@ class ExamManage extends React.Component<Props> {
                     disabledDate={this.disabledStartDate}
                     showTime
                     format="YYYY-MM-DD HH:mm:ss"
-                    value={startValue}
                     placeholder="开始时间"
+                    value={startValue}
                     onChange={this.onStartChange}
                     onOpenChange={this.handleStartOpenChange}
                   />
@@ -169,8 +169,8 @@ class ExamManage extends React.Component<Props> {
                     disabledDate={this.disabledEndDate}
                     showTime
                     format="YYYY-MM-DD HH:mm:ss"
-                    value={endValue}
                     placeholder="结束时间"
+                    value={endValue}
                     onChange={this.onEndChange}
                     open={endOpen}
                     onOpenChange={this.handleEndOpenChange}
