@@ -1,45 +1,53 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Table, Select } from 'antd'
-
+import { Table, Select, Button } from 'antd'
+const { Option } = Select
 interface Props {
-    question: any
     classmanger: any
+    examManger: any
 }
 
-@inject('question', 'classmanger')
+@inject('classmanger', 'examManger')
 @observer
 class ExamDetail extends React.Component<Props> {
     state = {
         data: [],
+        grade_id: '',
+        grade_name: '',
+        datas: [],
+        examStudent: [],
         status: ['未阅', '已阅'],
         columns: [
             {
-                title: '班级名',
-                dataIndex: 'class'
+                title: '班级',
+                dataIndex: 'classroom'
             },
             {
-                title: '课程名称',
-                dataIndex: 'project'
+                title: '姓名',
+                dataIndex: 'name'
             },
             {
                 title: '阅卷状态',
-                dataIndex: 'status'
+                dataIndex: 'statues'
             },
             {
-                title: '课程名称',
-                dataIndex: 'projects'
+                title: '开始时间',
+                dataIndex: 'start_time'
+            },
+            {
+                title: '结束时间',
+                dataIndex: 'end_time'
             },
             {
                 title: '成才率',
-                dataIndex: 'success'
+                dataIndex: 'successes'
             },
             {
                 title: '操作',
-                dataIndex: 'option',
+                dataIndex: 'options',
                 render: (text: any, record: any) => (
                     <span>
-                        <a onClick={this.examDetail.bind(this, text)}>批卷</a>
+                        <a>批卷</a>
                     </span>
                 )
             }
@@ -48,57 +56,90 @@ class ExamDetail extends React.Component<Props> {
     examDetail(text: any) {
         console.log(text, this.props)
     }
+    searchStudent = () => {
+        const dataes = this.state.examStudent.map((item: any, index) => {
+            if (this.state.grade_id === item.grade_id) {
+                return {
+                    classroom: this.state.grade_name,
+                    name: item.student_name,
+                    statues: item.status === 0 ? '未判' : '已判',
+                    start_time: item.start_time,
+                    end_time: item.end_time,
+                    successes: '-',
+                    key: index
+                }
+            } else {
+                return ''
+            }
+        })
+        this.setState({
+            dataes: dataes
+        })
+    }
     componentDidMount() {
         this.getList()
     }
     getList = async () => {
         const { getClassManger } = this.props.classmanger
+        const { examStudentList } = this.props.examManger
         let result = await getClassManger()
+        let results = await examStudentList()
         this.setState({
-            data: result.data
+            data: result.data,
+            examStudent: results.exam
         })
     }
-    handleChange(value: any) {
-        console.log(`Selected: ${value}`)
+    handleChange = (value: any) => {
+        console.log(value)
     }
-    handleChanges(value: any) {
-        console.log(`Selected: ${value}`)
+    handleChanges = (value: any) => {
+        return this.setState({
+            grade_id: value
+        })
     }
     public render() {
-        console.log(this.state.data)
-        const data = this.state.data.map((item: any, index) => {
-            return {
-                class: item.grade_name,
-                project: item.subject_text,
-                status: '',
-                projects: item.subject_text,
-                success: item.room_text,
-                key: index
-            }
-        })
+        const data = this.state.datas
+
         return (
             <div>
-                <div>
+                <label style={{ margin: '10px 30px 20px 5px' }}>
                     <span>状态</span>
                     <Select
                         defaultValue=""
                         onChange={this.handleChange}
                         style={{ width: 200 }}>
-                        {this.state.status}
+                        {this.state.status.map((item: any, index: any) => {
+                            return <Option key={index}>{item}</Option>
+                        })}
                     </Select>
-                </div>
-                <div>
+                </label>
+                <label style={{ margin: '10px 30px 20px 5px' }}>
                     <span>班级</span>
                     <Select
                         defaultValue=""
                         onChange={this.handleChanges}
                         style={{ width: 200 }}>
                         {this.state.data.map((item: any) => {
-                            return item.grade_item
+                            return (
+                                <Option
+                                    key={item.grade_id}
+                                    value={item.grade_id}>
+                                    {item.grade_name}
+                                </Option>
+                            )
                         })}
                     </Select>
-                </div>
+                </label>
+                <label>
+                    <Button
+                        type="primary"
+                        icon="search"
+                        onClick={this.searchStudent}>
+                        查询
+                    </Button>
+                </label>
                 <Table
+                    style={{ margin: '30px 0 0 0' }}
                     columns={this.state.columns}
                     dataSource={data}
                     size="middle"

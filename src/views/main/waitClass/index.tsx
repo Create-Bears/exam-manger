@@ -42,7 +42,7 @@ class WaitClass extends React.Component<Props> {
                         <a
                             onClick={() => {
                                 this.props.history.push(
-                                    '/home/examDetail/?id=' + record.class
+                                    '/home/examDetail/?id=' +record.success
                                 )
                                 console.log(record)
                             }}>
