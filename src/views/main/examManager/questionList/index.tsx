@@ -43,7 +43,7 @@ class QuestionList extends React.Component<Props> {
       {
         title: '操作',
         dataIndex: 'age',
-        render:()=><NavLink to="/home/examQuestionDetail"><b>详情</b></NavLink>
+        render:()=><NavLink to="/home/exammanager/examQuestionDetail"><b>详情</b></NavLink>
       },
     ]
   }

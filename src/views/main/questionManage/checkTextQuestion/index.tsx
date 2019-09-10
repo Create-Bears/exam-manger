@@ -188,7 +188,7 @@ class CheckTextQuestion extends React.Component<Props> {
                       className="antd-list-item-l"
                       onClick={() => {
                         this.props.history.replace(
-                          `/home/detail?id=${item.questions_id}`,
+                          `/home/question/detail?id=${item.questions_id}`,
                           { id: item.questions_id }
                         )
                         console.log(this.props)
@@ -234,15 +234,14 @@ class CheckTextQuestion extends React.Component<Props> {
                           }}
                           onClick={() => {
                             this.props.history.replace(
-                              `/home/checkTextEditor?id=${item.questions_id}`,
+                              `/home/question/checkTextEditor?id=${item.questions_id}`,
                               {
                                 id:
                                   item.questions_id
                               }
                             )
                           }}>
-                          编辑
-                                                </a>
+                          编辑</a>
                       </li>
                     </ul>
                   </div>

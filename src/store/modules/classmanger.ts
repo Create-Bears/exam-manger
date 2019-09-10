@@ -7,44 +7,49 @@ import {
     getDeleteClass, //删除班级
     getUpdateClass, //更新班级
     getStudentClass, //获取学生班级信息
-    getDeleteClasses //删除教室
+    getDeleteClasses, //删除教室
+    studentDelet//删除学生接口
 } from '../../service/index'
 
 class Question {
     @observable
-    @action
-    async getClassManger(params: any): Promise<any> {
+
+    @action async getClassManger(params: any): Promise<any> {
         let result: any = await getClassManger(params)
         return result
     }
-    async getAddClass(params: any): Promise<any> {
+    @action async getAddClass(params: any): Promise<any> {
         let result: any = await getAddClass(params)
         return result
     }
 
-    async getClasses(params: any): Promise<any> {
+    @action async getClasses(params: any): Promise<any> {
         let result: any = await getClasses(params)
         return result
     }
-    async getAddClasses(params: any): Promise<any> {
+    @action async getAddClasses(params: any): Promise<any> {
         let result: any = await getAddClasses(params)
         return result
     }
-    async getDeleteClass(params: any): Promise<any> {
+    @action async getDeleteClass(params: any): Promise<any> {
         let result: any = await getDeleteClass(params)
         return result
     }
 
-    async getUpdateClass(params: any): Promise<any> {
+    @action async getUpdateClass(params: any): Promise<any> {
         let result: any = await getUpdateClass(params)
         return result
     }
-    async getStudentClass():Promise<any>{
-        let result:any=await getStudentClass();
+    @action async getStudentClass(): Promise<any> {
+        let result: any = await getStudentClass();
         return result
-    }   
-    async getDeleteClasses(params: any): Promise<any> {
+    }
+    @action async getDeleteClasses(params: any): Promise<any> {
         let result: any = await getDeleteClasses(params)
+        return result
+    }
+    @action async studentDelet(id: any): Promise<any> {
+        let result: any = await studentDelet(id)
         return result
     }
 }

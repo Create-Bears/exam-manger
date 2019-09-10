@@ -2,12 +2,12 @@ import * as React from 'react'
 import './index.css'
 import { inject, observer } from 'mobx-react'
 // const { Option } = Select;
-import ADDUser from '../../../components/adduser'
-import AddIdentity from '../../../components/addIdentity'
-import AddView from '../../../components/addView'
-import AddApiIdentity from '../../../components/addApiIdentity'
-import SetApiIdentity from '../../../components/setApiIdentity'
-import SetViewIdentity from '../../../components/setViewIdentity'
+import ADDUser from '../../../../components/adduser'
+import AddIdentity from '../../../../components/addIdentity'
+import AddView from '../../../../components/addView'
+import AddApiIdentity from '../../../../components/addApiIdentity'
+import SetApiIdentity from '../../../../components/setApiIdentity'
+import SetViewIdentity from '../../../../components/setViewIdentity'
 
 interface Props {
     userShow: any
