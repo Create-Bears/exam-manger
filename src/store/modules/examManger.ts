@@ -1,10 +1,13 @@
-import { action } from 'mobx'
+import { action ,observable} from 'mobx'
 import { addExam, examListData, examStudentList } from '../../service/index'
 
 class ExamManger {
+    @observable questionListData:object[]=[]
     //添加试卷
     @action async addExam(params: object): Promise<any> {
-        let result = await addExam(params)
+        let result:any = await addExam(params)
+        console.log('this...',this)
+        // this.questionListData=result.data.question;
         return result
     }
     //获取试题列表

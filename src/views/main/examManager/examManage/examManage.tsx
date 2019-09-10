@@ -8,7 +8,7 @@ const { Option } = Select;
 interface Props {
   question: any,
   examManger: any,
-  history:any
+  history: any
 }
 
 @inject('question', 'examManger')
@@ -27,6 +27,7 @@ class ExamManage extends React.Component<Props> {
     exam_id: '',
     title: '',
     number: 0,
+    questionListData: [],
   }
   componentDidMount() {
     this.getList()
@@ -118,8 +119,10 @@ class ExamManage extends React.Component<Props> {
       "number": number,
     })
     if (result.code === 1) {
+      console.log(result)
+      window.localStorage.setItem('content', JSON.stringify(result.data.questions))
       message.success(result.msg);
-      this.props.history.push('/home/addExamList')
+      this.props.history.push('/home/exammanager/addExamList')
     }
   }
   render() {
@@ -154,27 +157,27 @@ class ExamManage extends React.Component<Props> {
             </div>
             <div className="examManage-item">
               <p>考试时间:</p>
-              <div style={{display:"flex"}}>
-                  <DatePicker
-                    disabledDate={this.disabledStartDate}
-                    showTime
-                    format="YYYY-MM-DD HH:mm:ss"
-                    placeholder="开始时间"
-                    value={startValue}
-                    onChange={this.onStartChange}
-                    onOpenChange={this.handleStartOpenChange}
-                  />
-                  <p style={{padding:'3px 10px'}}>-</p>
-                  <DatePicker
-                    disabledDate={this.disabledEndDate}
-                    showTime
-                    format="YYYY-MM-DD HH:mm:ss"
-                    placeholder="结束时间"
-                    value={endValue}
-                    onChange={this.onEndChange}
-                    open={endOpen}
-                    onOpenChange={this.handleEndOpenChange}
-                  />
+              <div style={{ display: "flex" }}>
+                <DatePicker
+                  disabledDate={this.disabledStartDate}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                  placeholder="开始时间"
+                  value={startValue}
+                  onChange={this.onStartChange}
+                  onOpenChange={this.handleStartOpenChange}
+                />
+                <p style={{ padding: '3px 10px' }}>-</p>
+                <DatePicker
+                  disabledDate={this.disabledEndDate}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                  placeholder="结束时间"
+                  value={endValue}
+                  onChange={this.onEndChange}
+                  open={endOpen}
+                  onOpenChange={this.handleEndOpenChange}
+                />
               </div>
             </div>
             <div className="examManage-item">
