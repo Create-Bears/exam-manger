@@ -14,6 +14,7 @@ import {
 class Question {
     @observable topList: any = []
 
+
     @action async getQuestionsType(params: any): Promise<any> {
         let result: any = await getQuestionsType(params)
         return result

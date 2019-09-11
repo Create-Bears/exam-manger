@@ -6,9 +6,10 @@ import store from '../store/index'
 
 //封装路由守卫
 function guard(history: any) {
-  console.log(history);
+  
   beforeEach(history);
   const unListen = history.listen((location: object) => {
+    console.log(location);
     beforeEach(history)
   })
   console.log(unListen)

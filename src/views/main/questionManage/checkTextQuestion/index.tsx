@@ -219,8 +219,7 @@ class CheckTextQuestion extends React.Component<Props> {
                           style={{
                             fontSize: '16px'
                           }}>
-                          {item.user_name}发布
-                                                </span>
+                          {item.user_name}发布 </span>
                       </div>
                     </div>
                     <ul className="antd-list-item-r">
@@ -240,8 +239,7 @@ class CheckTextQuestion extends React.Component<Props> {
                                   item.questions_id
                               }
                             )
-                          }}>
-                          编辑</a>
+                          }}>编辑</a>
                       </li>
                     </ul>
                   </div>
