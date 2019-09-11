@@ -22,6 +22,9 @@ interface Props {
 @inject('user', 'global')
 @observer
 class HomePage extends React.Component<Props> {
+    state={
+        type:['user','calendar','appstore','setting','calendar']
+    }
     render() {
         let { formatMessage } = this.props.intl //国际化
         let { viewAuthority } = this.props.user
@@ -68,14 +71,14 @@ class HomePage extends React.Component<Props> {
                         theme="dark"
                         mode="inline"
                         defaultSelectedKeys={['4']}>
-                        {myRoutes.map((item: any) => {
+                        {myRoutes.map((item: any,index:number) => {
                             if (item.children) {
                                 return (
                                     <SubMenu
                                         key={item.path}
                                         title={
                                             <span>
-                                                <Icon type="mail" />
+                                                <Icon type={this.state.type[index]} />
                                                 <span>
                                                     {item.title
                                                         ? formatMessage({
@@ -111,7 +114,7 @@ class HomePage extends React.Component<Props> {
                             } else {
                                 return (
                                     <Menu.Item key={item.path}>
-                                        <Icon type="pie-chart" />
+                                        <Icon type={this.state.type[index]} />
                                         <span>
                                             {item.title
                                                 ? formatMessage({

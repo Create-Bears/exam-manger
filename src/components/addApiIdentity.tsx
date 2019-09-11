@@ -21,16 +21,17 @@ class AddApiIdentity extends React.Component<AddApi>{
         <div className="adduser-input">
           <Input
             placeholder="请输入api接口权限名称"
-            name="api_authority_url"
-            value={api_authority_url}
+            name="api_authority_text"
+            value={api_authority_text}
+           
             onChange={this.handChange}
           />
         </div>
         <div className="adduser-input">
           <Input
             placeholder="请输入api接口权限url"
-            name="api_authority_text"
-            value={api_authority_text}
+            name="api_authority_url"
+            value={api_authority_url}
             onChange={this.handChange}
           />
         </div>
@@ -52,17 +53,25 @@ class AddApiIdentity extends React.Component<AddApi>{
   handClick = async () => {
     let { addApiIdentity } = this.props.addApiIdentity;
     let { api_authority_method, api_authority_text, api_authority_url } = this.state;
-    let result = await addApiIdentity({
-      "api_authority_text": api_authority_url,
-      "api_authority_url": api_authority_text,
-      "api_authority_method": api_authority_method
-    })
-
-    if (result.code === 1) {
-      message.success(result.msg)
-    } else {
-      message.error(result.msg)
+    if(api_authority_method===''){
+      message.error('请输入api接口权限方法')
+    }else if(api_authority_text===''){
+      message.error('请输入api接口权限方法')
+    }else if(api_authority_url===''){
+      message.error('请输入api接口权限url')
+    } else{
+      let result = await addApiIdentity({
+        "api_authority_text": api_authority_url,
+        "api_authority_url": api_authority_text,
+        "api_authority_method": api_authority_method
+      })
+      if (result.code === 1) {
+        message.success(result.msg)
+      } else {
+        message.error(result.msg)
+      }
     }
+    
   }
   handClear=()=>{
     this.setState({

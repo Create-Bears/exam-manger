@@ -1,14 +1,17 @@
 import * as React from 'react'
+import { SinglePickerProps } from 'antd/lib/date-picker/interface.d'
 import { Input, Select, InputNumber, DatePicker, message } from 'antd'
 import { inject, observer } from 'mobx-react'
 import * as moment from 'moment'
 import './index.css'
 
+
 const { Option } = Select;
 interface Props {
   question: any,
   examManger: any,
-  history: any
+  history: any,
+  value?: SinglePickerProps
 }
 
 @inject('question', 'examManger')
@@ -18,8 +21,8 @@ class ExamManage extends React.Component<Props> {
   state = {
     TypeList: [],
     classList: [],
-    startValue: moment().startOf('day'),
-    endValue: moment().startOf('day'),
+    startValue: moment().startOf(),
+    endValue: moment().startOf(),
     endOpen: false,
     start_time: '',
     end_time: '',
@@ -31,6 +34,7 @@ class ExamManage extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
+    console.log( moment().startOf('day'))
   }
 
   getList = async () => {
@@ -50,22 +54,6 @@ class ExamManage extends React.Component<Props> {
       [type]: value
     })
   }
-  disabledStartDate = (startValue: any) => {
-    const { endValue } = this.state;
-    if (!startValue || !endValue) {
-      return false;
-    }
-    return startValue.valueOf() > endValue.valueOf();
-  };
-
-  disabledEndDate = (endValue: any) => {
-    const { startValue } = this.state;
-    if (!endValue || !startValue) {
-      return false;
-    }
-    return endValue.valueOf() <= startValue.valueOf();
-  };
-
   onChange = (field: any, value: any) => {
     this.setState({
       [field]: value,
@@ -153,13 +141,12 @@ class ExamManage extends React.Component<Props> {
             </div>
             <div className="examManage-item">
               <p>*设置题量:</p>
-              <InputNumber min={1} max={5} defaultValue={number} onChange={this.handliTnputNumber} />
+              <InputNumber min={0} max={5} value={number} onChange={this.handliTnputNumber} />
             </div>
             <div className="examManage-item">
               <p>考试时间:</p>
               <div style={{ display: "flex" }}>
                 <DatePicker
-                  disabledDate={this.disabledStartDate}
                   showTime
                   format="YYYY-MM-DD HH:mm:ss"
                   placeholder="开始时间"
@@ -169,7 +156,6 @@ class ExamManage extends React.Component<Props> {
                 />
                 <p style={{ padding: '3px 10px' }}>-</p>
                 <DatePicker
-                  disabledDate={this.disabledEndDate}
                   showTime
                   format="YYYY-MM-DD HH:mm:ss"
                   placeholder="结束时间"

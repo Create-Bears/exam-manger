@@ -134,37 +134,48 @@ class AddUser extends React.Component<IProps> {
   handAddUser = async () => {
     let { user_name, user_pwd, identity_id, user_id } = this.state;
     console.log(user_id);
-    if (user_id === '') {
-      console.log(1);
-      let { getAddUser } = this.props.aDDuser;
-      let result = await getAddUser({
-        user_name: user_name,
-        user_pwd: user_pwd,
-        identity_id: identity_id
-      });
-      if (result.code === 1) {
-        message.success(result.msg);
-      } else {
-        message.error(result.msg);
-      }
+    if (user_name === '') {
+      message.error('请输入用户名');
+    } else if (user_pwd === '') {
+      message.error('请输入密码');
+    } else if (identity_id === '') {
+      message.error('请选择身份id');
+    } else if (user_id === "") {
+      message.error('请选择管理者身份id');
     } else {
-      console.log(2);
-      let { updataUser } = this.props.aDDuser;
-      let result = await updataUser({
-        user_id: user_id,
-        user_name: user_name,
-        user_pwd: user_pwd,
-        identity_id: identity_id
-      });
-      if (result.code === 1) {
-        message.success(result.msg);
-        this.setState({
-          user_id: ''
-        })
+      if (user_id === '') {
+        console.log(1);
+        let { getAddUser } = this.props.aDDuser;
+        let result = await getAddUser({
+          user_name: user_name,
+          user_pwd: user_pwd,
+          identity_id: identity_id
+        });
+        if (result.code === 1) {
+          message.success(result.msg);
+        } else {
+          message.error(result.msg);
+        }
       } else {
-        message.error(result.msg);
+        console.log(2);
+        let { updataUser } = this.props.aDDuser;
+        let result = await updataUser({
+          user_id: user_id,
+          user_name: user_name,
+          user_pwd: user_pwd,
+          identity_id: identity_id
+        });
+        if (result.code === 1) {
+          message.success(result.msg);
+          this.setState({
+            user_id: ''
+          })
+        } else {
+          message.error(result.msg);
+        }
       }
     }
+
   };
 }
 
