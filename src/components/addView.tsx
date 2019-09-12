@@ -51,15 +51,23 @@ class AddViewPage extends React.Component<ViewProps>{
   }
   handClick = async () => {
     let { addViewAuthor } = this.props.addViewAuthor;
-    let result = await addViewAuthor({
-      "view_authority_text": this.state.view_authority_text,
-      "view_id": this.state.view_id
-    })
-    if (result.code === 1) {
-      message.success(result.msg)
-    } else {
-      message.error(result.msg)
+    let {view_authority_text,view_id} = this.state;
+    if(view_authority_text===''){
+      message.error('请选择添加视图接口权限')
+    }else if(view_id===''){
+      message.error('请选择添加视图接口权限')
+    }else{
+      let result = await addViewAuthor({
+        "view_authority_text": view_authority_text,
+        "view_id": view_id
+      })
+      if (result.code === 1) {
+        message.success(result.msg)
+      } else {
+        message.error(result.msg)
+      }
     }
+    
   }
 }
 

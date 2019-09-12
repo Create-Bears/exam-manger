@@ -28,7 +28,9 @@ class SetApiIdentity extends React.Component<SetApiProps>{
   handClick = async () => {
     let { identity_id, api_authority_id } = this.state;
     let { setApiViewAuthor } = this.props.setApiViewAuthor;
-    if (identity_id === '' || api_authority_id === '') {
+    if (identity_id === '') {
+      message.error('未设置身份id,请设置')
+    } else if (api_authority_id === '') {
       message.error('未设置api接口权限,请设置')
     } else {
       let result = await setApiViewAuthor({

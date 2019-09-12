@@ -34,7 +34,10 @@ import ExamManager from '@/views/main/examManager'
 import ClassMange from '@/views/main/ClassMange'
 import WillClass from '@/views/main/WillClass'
 
-export default [
+import NoAuthority from '@/views/main/Noauthority'
+import Confirmauthority from '@/views/main/Confirmauthority'
+
+let routes=[
     {
         component: Login,
         path: '/login'
@@ -154,9 +157,19 @@ export default [
         ],
         component: HomePage,
         path: '/home'
-    },
-    {
-        from: '/',
-        to: '/login'
+    },{
+        path: '/403',
+        component: Confirmauthority
+    },{
+        path: '/404',
+        component:NoAuthority
+    },  {
+        from: "/",
+        to: "/login"
+    }, {
+        from: '*',
+        to: '/404'
     }
 ]
+
+export default routes

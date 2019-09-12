@@ -20,12 +20,12 @@ class Login extends React.Component<PropsInfo> {
 		e.preventDefault();
 		this.props.form.validateFields(async (err, values) => {
 			if (!err) {
-                console.log(values)
-                const result = await this.props.user.login(values);
-                console.log(result)
+          console.log(values)
+          const result = await this.props.user.login(values);
+          console.log(result)
 				if (result.code === 1) {
 					message.success(result.msg);
-					this.props.history.push('/home');
+					this.props.history.push('/home');	
 				} else {
 					message.error(result.msg);
 				}
@@ -33,6 +33,7 @@ class Login extends React.Component<PropsInfo> {
 		});
 	};
 	public render() {
+		console.log(this.props);
 		const { getFieldDecorator } = this.props.form;
 		return (
 			<div className='login-page'>
@@ -41,6 +42,7 @@ class Login extends React.Component<PropsInfo> {
 						<Form.Item>
 							{getFieldDecorator('user_name', {
 								validateTrigger: 'onBlur',
+								initialValue:this.props.user.account.user_name,
 								rules: [
 									{
 										validator: (ruler, value, callback) => {
@@ -70,6 +72,7 @@ class Login extends React.Component<PropsInfo> {
 						<Form.Item>
 							{getFieldDecorator('user_pwd', {
 								validateTrigger: 'onBlur',
+								initialValue:this.props.user.account.user_pwd,
 								rules: [
 									{
 										validator: (ruler, value, callback) => {

@@ -44,14 +44,19 @@ class AddUser extends React.Component<IProps>{
   handClickSf = async () => {
     let { identity_text } = this.state;
     let { getAddIdentity } = this.props.addIdentity;
-    let result = await getAddIdentity({
-      "identity_text": identity_text
-    })
-    if (result.code === 1) {
-      message.success(result.msg)
-    } else {
-      message.error(result.msg)
+    if(identity_text===''){
+      message.error('请输入身份名称')
+    }else{
+      let result = await getAddIdentity({
+        "identity_text": identity_text
+      })
+      if (result.code === 1) {
+        message.success(result.msg)
+      } else {
+        message.error(result.msg)
+      }
     }
+    
   }
 }
 
