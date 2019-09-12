@@ -2,18 +2,22 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    list-style: none;
+    text-decoration: none;
 }
 
-.ant-layout, .ant-layout-has-sider {
-    height: 100%!important;
+.ant-layout,
+.ant-layout-has-sider {
+    height: 100% !important;
 }
 
-.ant-layout-sider, .ant-layout-sider-dark {
-    height: 100%!important;
+.ant-layout-sider,
+.ant-layout-sider-dark {
+    height: 100% !important;
 }
 
 .ant-layout-sider-children {
-    height: 100%!important;
+    height: 100% !important;
 }
 
 .user_slot {
@@ -22,6 +26,9 @@ body {
     justify-content: center;
     align-items: center;
     padding: 0 10px;
+    position: absolute;
+    top: 0;
+    right: 4%;
 }
 
 .user_avatar {
@@ -49,6 +56,48 @@ body {
 
 .user_string {
     position: absolute;
-    left: 50%;
+    right: 0%;
     transform-origin: 0 center;
+}
+.lists {
+    position: absolute;
+    top: 8%;
+    right: 4%;
+    width: 120px;
+    height: 160px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    z-index: 9999;
+}
+
+.lists ul {
+    width: 120px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.lists ul li {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+.appear {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+.header {
+    position: relative;
+}
+
+.dismessage:hover {
+    background: skyblue;
 }
