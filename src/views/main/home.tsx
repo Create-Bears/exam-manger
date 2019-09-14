@@ -1,4 +1,14 @@
-import { Icon, Layout, Menu, Select, Modal, Form, Upload, Input } from 'antd'
+import {
+    Icon,
+    Layout,
+    Menu,
+    Select,
+    Modal,
+    Form,
+    Upload,
+    Input,
+    message
+} from 'antd'
 import * as React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../../index.css'
@@ -23,8 +33,9 @@ interface Props {
     global: any
     data: any
     form: any
+    why: any
 }
-@inject('user', 'global')
+@inject('user', 'global', 'why')
 @observer
 class HomePage extends React.Component<Props> {
     state = {
@@ -32,6 +43,9 @@ class HomePage extends React.Component<Props> {
         visible: false,
         appearing: true,
         loading: false
+    }
+    componentDidMount() {
+        this.props.why.getlist()
     }
     handleChange = (value: any) => {
         const { locale } = this.props.global
@@ -52,8 +66,21 @@ class HomePage extends React.Component<Props> {
         })
     }
     handleOk = () => {
-        this.setState({
-            visible: false
+        this.props.form.validateFields(async (err: any, val: any) => {
+            console.log('err...', err, val)
+            if (!err) {
+                val.avatar = this.props.user.avatar
+                const { code, msg } = await this.props.user.updateUserInfo(val)
+                if (code === 1) {
+                    this.props.user.updateName(val.user_name, val.avatar)
+                    message.success('更新用户信息成功')
+                    this.setState({
+                        visible: false
+                    })
+                } else {
+                    message.error(msg)
+                }
+            }
         })
     }
 
@@ -84,10 +111,10 @@ class HomePage extends React.Component<Props> {
         const { getFieldDecorator } = this.props.form
         const { userInfo, avatar } = this.props.user
         // const { locale } = this.props.global
-        console.log('viewAuthority...', viewAuthority)
+        // console.log('viewAuthority...', viewAuthority)
         let myRoutes: any = filterView(routes, viewAuthority)
         myRoutes = myRoutes[1].children
-        console.log('myRoutes...', myRoutes)
+        // console.log('myRoutes...', myRoutes)
 
         const uploadButton = (
             <div>
@@ -210,8 +237,8 @@ class HomePage extends React.Component<Props> {
                                             height: '50px',
                                             borderRadius: '100%'
                                         }}
-                                        src={avatar}
-                                        alt="用户头像"
+                                        src={userInfo.avatar}
+                                        alt=""
                                     />
                                 </span>
                             </span>
@@ -251,8 +278,8 @@ class HomePage extends React.Component<Props> {
                                     initialValue: userInfo.user_id
                                 })(
                                     <Upload
-                                        listType="picture-card"
                                         name="avatar"
+                                        listType="picture-card"
                                         action="http://123.206.55.50:11000/upload"
                                         showUploadList={false}
                                         beforeUpload={this.beforeUpload}
