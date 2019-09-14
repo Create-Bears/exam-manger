@@ -50,8 +50,9 @@ class User {
     //获取用户信息
     @action async getUserInfoUser(): Promise<any> {
         let userInfo: any = await getUserInfoUser()
-        this.userInfo = userInfo.data;
-        this.avatar = userInfo.data.avatar;
+        console.log(this, this.userInfo, 'this')
+        this.userInfo = userInfo.data
+        this.avatar = userInfo.data.avatar //为了上传头像后点击确定按钮 用户头像才改变
         this.getViewAuthority()
     }
     //获取用户权限
@@ -64,11 +65,21 @@ class User {
     @action changeAvatar(avatar: string): void {
         this.avatar = avatar
     }
-    @action async updateUserInfo(data:object):Promise<any>{
-        //更新完当前用户信息需要重新获取一下用户信息
-        let result:any=await updateUserInfo(data);
-        await this.getUserInfoUser()
+
+    //更新用户
+    @action async updateUserInfo(data: object): Promise<any> {
+        let userInfo = this.userInfo
+        this.userInfo = userInfo
+        let result: any = await updateUserInfo(data)
         return result
+    }
+
+    // 更新名字与头像
+    @action updateName(name: string, avators: string) {
+        let userInfo = this.userInfo
+        userInfo.user_name = name
+        userInfo.avatar = avators
+        this.userInfo = userInfo
     }
 }
 

@@ -7,6 +7,7 @@
     "jsx-self-close": false,
     "jsx-no-lambda": false,
     "object-literal-sort-keys": false,
+    "no-invalid-this":false,
     "member-access": false,
     "ordered-imports": [
       false,
