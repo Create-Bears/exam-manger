@@ -38,7 +38,6 @@ export function filterView(
             }
 
             if (item.view_id) {
-                //   console.log('item...', item);
                 if (
                     viewAutority.findIndex(
                         (value: any) => value.view_id === item.view_id

@@ -52,16 +52,19 @@ let routes=[
                     {
                         component: AddList,
                         title: 'menu.question.add',
+                        view_id: "main-addQuestions",
                         path: '/home/question/addlist'
                     },
                     {
                         component: CheckTextQuestion,
                         title: 'menu.question.search',
+                        view_id: "main-watchQuestions",
                         path: '/home/question/checkTextQuestion'
                     },
                     {
                         component: TextQuestion,
                         title: 'menu.question.kind',
+                        view_id: "main-questionsType",
                         path: '/home/question/textQuestion'
                     },
                     {
@@ -82,11 +85,13 @@ let routes=[
                     {
                         component: UserShow,
                         title: 'menu.user.show',
+                        view_id:'main-showUser',
                         path: '/home/usermanage/usershow'
                     },
                     {
                         component: AddUser,
                         title: 'menu.user.add',
+                        view_id:'main-addUser',
                         path: '/home/usermanage/adduser'
                     }
                 ]
@@ -99,11 +104,13 @@ let routes=[
                     {
                         component: ExamManage,
                         title: 'menu.exam.add',
+                        view_id:'main-addExam',
                         path: '/home/exammanager/examManage'
                     },
                     {
                         component: QuestionList,
                         title: 'menu.exam.list',
+                        view_id:'main-examList',
                         path: '/home/exammanager/questionList'
                     },
                     {
@@ -124,16 +131,19 @@ let routes=[
                     {
                         component: ClassManger,
                         title: 'menu.class.manger',
+                        view_id:'main-grade',
                         path: '/home/classmange/classManger'
                     },
                     {
                         component: ClassRoomer,
                         title: 'menu.classroom.manger',
+                        view_id:'main-room',
                         path: '/home/classmange/classRoomer'
                     },
                     {
                         component: StudentManger,
                         title: 'menu.student.manger',
+                        view_id:'main-student',
                         path: '/home/classmange/studentManger'
                     }
                 ]
@@ -146,6 +156,7 @@ let routes=[
                     {
                         component: WaitClass,
                         title: 'menu.read.waitclass',
+                        view_id:'main-examPaperClassmate',
                         path: '/home/willclass/waitClass'
                     },
                     {

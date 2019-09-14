@@ -141,6 +141,19 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          //配置scss-module
+          {
+            test:/\.s[ac]ss$/i,
+            loader: ['style-loader', {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                // localIdentName: '[path][name]---[local]--[hash:base64:5]',
+                localIdentName: '[name]_[local]_[hash:base64:5]'
+              }
+            },
+            'sass-loader']
+          },
           {
             test: /\.(js|jsx|mjs)$/,
             include: paths.appSrc,

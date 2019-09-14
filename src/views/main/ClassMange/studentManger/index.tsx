@@ -1,7 +1,9 @@
 import * as React from 'react'
 import { Select, Button, Table, Input, message } from 'antd'
 import { inject, observer } from 'mobx-react'
-import './index.css'
+import './index.scss'
+//使用css-module需要引用
+// import styles from './index.scss'
 
 const { Option } = Select;
 interface Props {
@@ -101,7 +103,6 @@ class StudentManger extends React.Component<Props>{
     }
   }
   handClick = () => {
-    console.log(this.state)
     let { value, classNumber, studentClassNumber } = this.state;
     if (value) {
       let newData = this.state.data.filter((item: any) => item.student_name === value);
@@ -159,6 +160,7 @@ class StudentManger extends React.Component<Props>{
     let { columns, data, classList, studentClassList, value ,classNumber,studentClassNumber} = this.state;
     return (
       <div>
+        {/* <h1 className={styles.active}>lalalal</h1> */}
         <h2 className="adduser-title">学生管理</h2>
         <div>
           <div className="student-top">

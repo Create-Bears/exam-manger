@@ -104,8 +104,10 @@ class HomePage extends React.Component<Props> {
           // const { locale } = this.props.global
           // console.log('viewAuthority...', viewAuthority)
           let myRoutes: any = filterView(routes, viewAuthority)
-          myRoutes = myRoutes[1].children
-          // console.log('myRoutes...', myRoutes)
+          console.log('myRoutes11111...', myRoutes)
+          myRoutes = myRoutes[1].children;
+          console.log('myRoutes222222222...', myRoutes)
+          console.log(this.props.children)  
 
       const uploadButton = (
         <div>
@@ -158,7 +160,7 @@ class HomePage extends React.Component<Props> {
               theme="dark"
               mode="inline"
               defaultSelectedKeys={['4']}>
-              {myRoutes.map((item: any) => {
+              {myRoutes?myRoutes.map((item: any) => {
                 if (item.children) {
                   return (
                     <SubMenu
@@ -212,7 +214,7 @@ class HomePage extends React.Component<Props> {
                     </Menu.Item>
                   )
                 }
-              })}
+              }):null}
             </Menu>
           </Sider>
           <Layout style={{ height: '100%' }}>

@@ -12,6 +12,10 @@ import { createBrowserHistory } from 'history'
 
 //引入路由守卫
 import guard, { filterView } from '../utils/permission'
+const localeMap = {
+    en: enUS,
+    zh: zhCN
+}
 
 const history = createBrowserHistory()
 
@@ -20,10 +24,7 @@ console.log('myRoutes...', myRoutes, routes)
 
 guard(history)
 
-const localeMap = {
-    en: enUS,
-    zh: zhCN
-}
+
 @inject('global')
 @observer
 class Intl extends React.Component<any> {
@@ -33,7 +34,7 @@ class Intl extends React.Component<any> {
                 locale={this.props.global.locale}
                 messages={localeMap[this.props.global.locale]}>
                 <Router history={history}>
-                    <RouterView routes={myRoutes} />
+                    <RouterView routes={routes} />
                 </Router>
             </IntlProvider>
         )
