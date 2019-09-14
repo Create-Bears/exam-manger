@@ -2,7 +2,8 @@ import { observable, action } from 'mobx'
 import {
     getUserLogin,
     getUserInfoUser,
-    getViewAuthority
+    getViewAuthority,
+    updateUserInfo //更新当前用户信息
 } from '../../service/index'
 import { setToken, removeToken } from '../../utils/index'
 
@@ -49,7 +50,8 @@ class User {
     //获取用户信息
     @action async getUserInfoUser(): Promise<any> {
         let userInfo: any = await getUserInfoUser()
-        this.userInfo = userInfo.data
+        this.userInfo = userInfo.data;
+        this.avatar = userInfo.data.avatar;
         this.getViewAuthority()
     }
     //获取用户权限
@@ -61,6 +63,12 @@ class User {
     // 修改用户头像
     @action changeAvatar(avatar: string): void {
         this.avatar = avatar
+    }
+    @action async updateUserInfo(data:object):Promise<any>{
+        //更新完当前用户信息需要重新获取一下用户信息
+        let result:any=await updateUserInfo(data);
+        await this.getUserInfoUser()
+        return result
     }
 }
 
