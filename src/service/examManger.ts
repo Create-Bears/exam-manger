@@ -17,3 +17,9 @@ export let examStudentList = (params: object) => {
     const url = '/exam/student'
     return request.get(url, { params })
 }
+
+//添加考试后重新获取数据
+export let examAddQuestion = (params: object,id:any) => {
+    const url = `/exam/exam/${id}`
+    return request.put(url, params)
+}

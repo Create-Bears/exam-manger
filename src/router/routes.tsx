@@ -1,41 +1,52 @@
+import * as Loadable from 'react-loadable'
+import * as React from 'react'
+
+function loading(){
+    return <div>loading...</div>
+}
 //一级页面
-import Login from '../views/Login'
-import HomePage from '../views/main/home'
+let Login = Loadable({loading:loading,loader:()=>import('../views/Login')})
+let HomePage=Loadable({loading:loading,loader:()=>import('../views/main/home')})
+
 
 //试卷管理
-import AddList from '../views/main/questionManage/addList'
-import CheckTextQuestion from '@/views/main/questionManage/checkTextQuestion'
-import TextQuestion from '../views/main/questionManage/textQuestion'
-import Detail from '../views/main/questionManage/detail'
-import CheckTextEditor from '../views/main/questionManage/checkTextEditor'
+let AddList=Loadable({loading:loading,loader:()=>import('../views/main/questionManage/addList')})
+let CheckTextQuestion=Loadable({loading:loading,loader:()=>import('@/views/main/questionManage/checkTextQuestion')})
+let TextQuestion=Loadable({loading:loading,loader:()=>import('../views/main/questionManage/textQuestion')})
+let Detail=Loadable({loading:loading,loader:()=>import('../views/main/questionManage/detail')})
+let CheckTextEditor=Loadable({loading:loading,loader:()=>import('../views/main/questionManage/checkTextEditor')})
+
 
 //用户管理
-import UserShow from '../views/main/UserManage/UserShow'
-import AddUser from '../views/main/UserManage/addUser'
+let UserShow=Loadable({loading:loading,loader:()=>import('../views/main/UserManage/UserShow')})
+let AddUser=Loadable({loading:loading,loader:()=>import('../views/main/UserManage/addUser')})
 
 //考试管理
-import ExamManage from '@/views/main/examManager/examManage/examManage'
-import QuestionList from '@/views/main/examManager/questionList'
-import ExamQuestionDetail from '@/views/main/examManager/examquestiondetail'
-import AddExamList from '@/views/main/examManager/addExamList'
+let ExamManage=Loadable({loading:loading,loader:()=>import('@/views/main/examManager/examManage/examManage')})
+let QuestionList=Loadable({loading:loading,loader:()=>import('@/views/main/examManager/questionList')})
+let ExamQuestionDetail=Loadable({loading:loading,loader:()=>import('@/views/main/examManager/examquestiondetail')})
+let AddExamList=Loadable({loading:loading,loader:()=>import('@/views/main/examManager/addExamList')})
 
 //班级管理
-import ClassManger from '../views/main/ClassMange/classManger'
-import ClassRoomer from '../views/main/ClassMange/classRoomer'
-import StudentManger from '@/views/main/ClassMange/studentManger'
+let ClassManger=Loadable({loading:loading,loader:()=>import('../views/main/ClassMange/classManger')})
+let ClassRoomer=Loadable({loading:loading,loader:()=>import('../views/main/ClassMange/classRoomer')})
+let StudentManger=Loadable({loading:loading,loader:()=>import('@/views/main/ClassMange/studentManger')})
 
 //待批班级
-import WaitClass from '../views/main/WillClass/waitClass'
-import ExamDetail from '../views/main/WillClass/examDetail'
+let WaitClass=Loadable({loading:loading,loader:()=>import('../views/main/WillClass/waitClass')})
+let ExamDetail=Loadable({loading:loading,loader:()=>import('../views/main/WillClass/examDetail')})
 
-import QuestionManage from '@/views/main/questionManage'
-import UserManage from '@/views/main/UserManage'
-import ExamManager from '@/views/main/examManager'
-import ClassMange from '@/views/main/ClassMange'
-import WillClass from '@/views/main/WillClass'
 
-import NoAuthority from '@/views/main/Noauthority'
-import Confirmauthority from '@/views/main/Confirmauthority'
+let QuestionManage=Loadable({loading:loading,loader:()=>import('@/views/main/questionManage')})
+let UserManage=Loadable({loading:loading,loader:()=>import('@/views/main/UserManage')})
+let ExamManager=Loadable({loading:loading,loader:()=>import('@/views/main/examManager')})
+let ClassMange=Loadable({loading:loading,loader:()=>import('@/views/main/ClassMange')})
+let WillClass=Loadable({loading:loading,loader:()=>import('@/views/main/WillClass')})
+
+
+let NoAuthority=Loadable({loading:loading,loader:()=>import('@/views/main/Noauthority')})
+let Confirmauthority=Loadable({loading:loading,loader:()=>import('@/views/main/Confirmauthority')})
+
 
 let routes=[
     {

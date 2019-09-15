@@ -110,7 +110,6 @@ class ExamManage extends React.Component<Props> {
         "number": number,
       })
       if (result.code === 1) {
-        console.log(result)
         window.localStorage.setItem('content', JSON.stringify(result.data.questions))
         message.success(result.msg);
         this.props.history.push('/home/exammanager/addExamList')

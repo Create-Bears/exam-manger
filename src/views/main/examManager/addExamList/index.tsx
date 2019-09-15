@@ -19,19 +19,29 @@ class AddExamList extends React.Component<Props>{
     questions:JSON.parse(window.localStorage.getItem('content')+'') 
   }
   handClick= async()=>{
-    const { examListData } = this.props.examManger;
+    const { examListData ,examAddQuestion} = this.props.examManger;
     let examQuestionListData = await examListData();
-    console.log(examQuestionListData)
+    let ids:any = new Array();
+    this.state.questions.map((item:any)=>{
+      ids.push(item.questions_id)
+      return ids
+    })
+    
+    let params=JSON.stringify(ids.join(','))
+    console.log('params....',params)
+    let result = await examAddQuestion({
+      question_ids:params
+    })
+    console.log(examQuestionListData,result)
     this.props.history.push('/home/exammanager/questionList')
   }
   render(){
-    console.log(this.state)
+    console.log(this.props.examManger.questionListData)
     return <div>
       <h2 className="adduser-title">创建试卷</h2>
       <div className="content">
         <Button>添加新题</Button>
         {this.state.questions.length?this.state.questions.map((item:any,index:number)=>{
-            console.log(item)
             return <div key={item.questions_id} style={{border:'1px solid #ccc',marginTop:'20px',padding:'20px'}} >
                <div className="examList-title">
                   <p>{index+1}:{item.title}</p>
