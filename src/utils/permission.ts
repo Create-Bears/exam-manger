@@ -24,39 +24,34 @@ function beforeEach(history: any) {
     }
 }
 
-export function filterView(
-    originRoutes: object[],
-    viewAutority: object[]
-): object[] {
-    const forbiddenView: object[] = []
+
+export function filterView(originRoutes: object[], viewAutority: object[]): object[] {
+    const forbiddenView: object[] = [];
 
     function func(originRoutes: object[], viewAutority: object[]): object[] {
-        const routes: object[] = []
+        const routes: object[] = [];
         originRoutes.forEach(({ ...item }: any) => {
             if (item.children) {
-                item.children = func(item.children, viewAutority)
+                item.children = func(item.children, viewAutority);
             }
 
             if (item.view_id) {
-                if (
-                    viewAutority.findIndex(
-                        (value: any) => value.view_id === item.view_id
-                    ) !== -1
-                ) {
-                    routes.push(item)
+                if (viewAutority.findIndex((value: any) => value.view_id === item.view_id) !== -1) {
+                    routes.push(item);
                 } else {
-                    forbiddenView.push({ from: item.path, to: '/403' })
+                    forbiddenView.push({ from: item.path, to: '/403' });
                 }
             } else {
-                routes.push(item)
+                routes.push(item);
             }
         })
-        return routes
+        return routes;
     }
 
-    let routes = func(originRoutes, viewAutority)
-    //   console.log('routes...', routes, 'forbiddenView...', forbiddenView);
-    return forbiddenView.concat(routes)
+
+    let routes = func(originRoutes, viewAutority);
+    console.log('routes...', routes, 'forbiddenView...', forbiddenView);
+    return forbiddenView.concat(routes);
 }
 
 export default guard

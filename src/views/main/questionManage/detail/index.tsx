@@ -2,6 +2,11 @@ import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import './index.css'
 const ReactMarkdown = require('react-markdown')
+// import marked from 'marked';
+// import hljs from 'highlight.js';
+
+// import SyntaxHighlighter from 'react-syntax-highlighter';
+// import { tomorrowNightEighties } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface Props {
     question: any
@@ -46,18 +51,21 @@ class Detail extends React.Component<Props> {
                                 <h3>题目信息</h3>
                                 <div className="antd-list-item-l-b">
                                     <div>
-                                        <div className="ant-tag ant-tag-blue">
+                                        <div className="ant-tag-blue">
                                             {item.questions_type_text}
                                         </div>
-                                        <div className="ant-tag ant-tag-geekblue">
+                                        <div className="ant-tag-geekblue">
                                             {item.subject_text}
                                         </div>
-                                        <div className="ant-tag ant-tag-orange">
+                                        <div className="ant-tag-orange">
                                             {item.exam_name}
                                         </div>
                                     </div>
                                 </div>
                                 <h4>{item.title}</h4>
+                                {/* <SyntaxHighlighter language="" style={tomorrowNightEighties}>
+                                    {item.questions_stem}
+                                </SyntaxHighlighter> */}
                                 <ReactMarkdown source={item.questions_stem} />
                                 <ReactMarkdown source={item.questions_answer} />
                             </div>

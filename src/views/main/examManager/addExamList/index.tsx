@@ -7,7 +7,8 @@ const ReactMarkdown = require('react-markdown')
 
 interface Props{
   questions:any,
-  history:any
+  history:any,
+  examManger:any
 }
 
 @inject('examManger')
@@ -17,7 +18,10 @@ class AddExamList extends React.Component<Props>{
   state={
     questions:JSON.parse(window.localStorage.getItem('content')+'') 
   }
-  handClick=()=>{
+  handClick= async()=>{
+    const { examListData } = this.props.examManger;
+    let examQuestionListData = await examListData();
+    console.log(examQuestionListData)
     this.props.history.push('/home/exammanager/questionList')
   }
   render(){

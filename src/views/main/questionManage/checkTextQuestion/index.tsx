@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Layout, Select, Button } from 'antd'
-import './index.css'
+import './index.scss'
 const { Option, OptGroup } = Select
 
 interface Props {
@@ -99,7 +99,6 @@ class CheckTextQuestion extends React.Component<Props> {
                 defaultValue=""
                 style={{ width: 200 }}
                 onChange={(value: any) => {
-                  // console.log(value)
                   this.setState({
                     val: value
                   })
@@ -196,28 +195,28 @@ class CheckTextQuestion extends React.Component<Props> {
                       <div className="antd-list-item-l-t">
                         <h4
                           style={{
-                            fontSize: '16px'
+                            fontSize: '14px'
                           }}>
                           {item.title}
                         </h4>
                       </div>
                       <div className="antd-list-item-l-b">
                         <div>
-                          <div className="ant-tag ant-tag-blue">
+                          <div className="blue">
                             {
                               item.questions_type_text
                             }
                           </div>
-                          <div className="ant-tag ant-tag-geekblue">
+                          <div className="geekblue">
                             {item.subject_text}
                           </div>
-                          <div className="ant-tag ant-tag-orange">
+                          <div className="orange">
                             {item.exam_name}
                           </div>
                         </div>
                         <span
                           style={{
-                            fontSize: '16px'
+                            fontSize: '14px'
                           }}>
                           {item.user_name}发布 </span>
                       </div>
