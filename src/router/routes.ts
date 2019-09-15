@@ -37,7 +37,7 @@ import WillClass from '@/views/main/WillClass'
 import NoAuthority from '@/views/main/Noauthority'
 import Confirmauthority from '@/views/main/Confirmauthority'
 
-let routes=[
+let routes = [
     {
         component: Login,
         path: '/login'
@@ -52,16 +52,19 @@ let routes=[
                     {
                         component: AddList,
                         title: 'menu.question.add',
+                        view_id: 'main-addQuestions',
                         path: '/home/question/addlist'
                     },
                     {
                         component: CheckTextQuestion,
                         title: 'menu.question.search',
+                        view_id: 'main-watchQuestions',
                         path: '/home/question/checkTextQuestion'
                     },
                     {
                         component: TextQuestion,
                         title: 'menu.question.kind',
+                        view_id: 'main-questionsType',
                         path: '/home/question/textQuestion'
                     },
                     {
@@ -157,16 +160,20 @@ let routes=[
         ],
         component: HomePage,
         path: '/home'
-    },{
+    },
+    {
         path: '/403',
         component: Confirmauthority
-    },{
+    },
+    {
         path: '/404',
-        component:NoAuthority
-    },  {
-        from: "/",
-        to: "/login"
-    }, {
+        component: NoAuthority
+    },
+    {
+        from: '/',
+        to: '/login'
+    },
+    {
         from: '*',
         to: '/404'
     }
