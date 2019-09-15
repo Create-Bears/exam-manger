@@ -38,7 +38,7 @@ export function filterView(
             }
 
             if (item.view_id) {
-                //   console.log('item...', item);
+                console.log('item...', item)
                 if (
                     viewAutority.findIndex(
                         (value: any) => value.view_id === item.view_id
@@ -56,7 +56,7 @@ export function filterView(
     }
 
     let routes = func(originRoutes, viewAutority)
-    //   console.log('routes...', routes, 'forbiddenView...', forbiddenView);
+    console.log('routes...', routes, 'forbiddenView...', forbiddenView)
     return forbiddenView.concat(routes)
 }
 
