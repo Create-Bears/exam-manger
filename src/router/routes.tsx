@@ -1,4 +1,4 @@
-import * as Loadable from 'react-loadable'
+import * as Loadable from 'react-loadable' //路由按需加载
 import * as React from 'react'
 
 function loading() {
