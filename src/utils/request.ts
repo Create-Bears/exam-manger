@@ -1,14 +1,15 @@
 import axios from 'axios'
 import { getToken } from './index'
 import { message } from 'antd'
-// const Url = {
-//     '123.206.55.50': "//exam.jasonandjay.com",
-//     'jasonandjay.com': "//exam.jasonandjay.com",
-//     '127.0.0.1': '//169.254.191.25:7001'
-// }
+const Url = {
+    '123.206.55.50': "//exam.jasonandjay.com",
+    'jasonandjay.com': "//exam.jasonandjay.com",
+    '127.0.0.1': '//169.254.191.25:7001'
+}
 
 const instance = axios.create({
-    baseURL: 'http://169.254.191.25:7001',
+    // baseURL: 'http://169.254.191.25:7001',
+    baseURL:Url[window.location.host],
     timeout: 1000,
     headers: { 'authorization': getToken() }
 });
