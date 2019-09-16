@@ -1,4 +1,35 @@
 {
+<<<<<<< HEAD
+  "main.css": "static/css/main.ddf96373.css",
+  "main.js": "static/js/main.0d6e805a.js",
+  "static/js/0.3239853b.chunk.js": "static/js/0.3239853b.chunk.js",
+  "static/js/1.c000730e.chunk.js": "static/js/1.c000730e.chunk.js",
+  "static/js/10.666ffddd.chunk.js": "static/js/10.666ffddd.chunk.js",
+  "static/js/11.8313f6e1.chunk.js": "static/js/11.8313f6e1.chunk.js",
+  "static/js/12.98b35ca7.chunk.js": "static/js/12.98b35ca7.chunk.js",
+  "static/js/13.c011bf12.chunk.js": "static/js/13.c011bf12.chunk.js",
+  "static/js/14.0a88b934.chunk.js": "static/js/14.0a88b934.chunk.js",
+  "static/js/15.a0dcae8a.chunk.js": "static/js/15.a0dcae8a.chunk.js",
+  "static/js/16.cc11db26.chunk.js": "static/js/16.cc11db26.chunk.js",
+  "static/js/17.41120718.chunk.js": "static/js/17.41120718.chunk.js",
+  "static/js/18.e31a724a.chunk.js": "static/js/18.e31a724a.chunk.js",
+  "static/js/19.9ccd8a73.chunk.js": "static/js/19.9ccd8a73.chunk.js",
+  "static/js/2.8ee50bb6.chunk.js": "static/js/2.8ee50bb6.chunk.js",
+  "static/js/20.f7393ba2.chunk.js": "static/js/20.f7393ba2.chunk.js",
+  "static/js/21.f4f172e2.chunk.js": "static/js/21.f4f172e2.chunk.js",
+  "static/js/22.6ebcfa23.chunk.js": "static/js/22.6ebcfa23.chunk.js",
+  "static/js/23.772e3e3e.chunk.js": "static/js/23.772e3e3e.chunk.js",
+  "static/js/24.71519482.chunk.js": "static/js/24.71519482.chunk.js",
+  "static/js/3.671cdc30.chunk.js": "static/js/3.671cdc30.chunk.js",
+  "static/js/4.ea7f8412.chunk.js": "static/js/4.ea7f8412.chunk.js",
+  "static/js/5.179d724f.chunk.js": "static/js/5.179d724f.chunk.js",
+  "static/js/6.362a6929.chunk.js": "static/js/6.362a6929.chunk.js",
+  "static/js/7.a7e5c890.chunk.js": "static/js/7.a7e5c890.chunk.js",
+  "static/js/8.e2bd3376.chunk.js": "static/js/8.e2bd3376.chunk.js",
+  "static/js/9.7f5acdf2.chunk.js": "static/js/9.7f5acdf2.chunk.js",
+  "static\\media\\index.scss": "static/media/index.f7d40345.scss",
+  "vendor.js": "static/js/vendor.3fc4852d.js"
+=======
   "main.css": "static/css/main.35d5a845.css",
   "main.css.map": "static/css/main.35d5a845.css.map",
   "main.js": "static/js/main.637717f1.js",
@@ -54,4 +85,5 @@
   "static/js/9.8e1b4524.chunk.js": "static/js/9.8e1b4524.chunk.js",
   "static/js/9.8e1b4524.chunk.js.map": "static/js/9.8e1b4524.chunk.js.map",
   "static\\media\\index.scss": "static/media/index.707d4a33.scss"
+>>>>>>> 7f4e170d9a06635583fd4a9919c2eb84eb5d5b79
 }
