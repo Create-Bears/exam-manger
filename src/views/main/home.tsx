@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 import '../../index.css'
 import { inject, observer } from 'mobx-react'
 
-
 //引入用户路由
 import routes from '../../router/routes'
 import { filterView } from '../../utils/permission'
