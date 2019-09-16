@@ -58,6 +58,7 @@ class User {
     //获取用户权限
     @action async getViewAuthority(): Promise<any> {
         let viewAuthority: any = await getViewAuthority()
+        console.log(viewAuthority)
         this.viewAuthority = viewAuthority.data
     }
 

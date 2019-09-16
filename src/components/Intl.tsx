@@ -8,22 +8,23 @@ import { Router } from 'react-router'
 import { inject, observer } from 'mobx-react'
 // 引入路由配置
 import routes from '../router/routes'
-import { createBrowserHistory } from 'history'
+import { createHashHistory } from 'history'
 
 //引入路由守卫
 import guard, { filterView } from '../utils/permission'
+const localeMap = {
+    en: enUS,
+    zh: zhCN
+}
 
-const history = createBrowserHistory()
+const history = createHashHistory()
 
 const myRoutes = filterView(routes, store.user.viewAuthority)
 console.log('myRoutes...', myRoutes, routes)
 
 guard(history)
 
-const localeMap = {
-    en: enUS,
-    zh: zhCN
-}
+
 @inject('global')
 @observer
 class Intl extends React.Component<any> {
@@ -33,7 +34,7 @@ class Intl extends React.Component<any> {
                 locale={this.props.global.locale}
                 messages={localeMap[this.props.global.locale]}>
                 <Router history={history}>
-                    <RouterView routes={myRoutes} />
+                    <RouterView routes={routes} />
                 </Router>
             </IntlProvider>
         )

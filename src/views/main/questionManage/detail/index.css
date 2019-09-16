@@ -16,3 +16,80 @@
     border-radius: 5px;
     padding: 15px;
 }
+.ant-tag-blue {
+    font-variant: tabular-nums;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.65);
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: inline-block;
+      line-height: 25px;
+      height: 25px;
+      padding: 0 10px;
+      border-radius: 2px;
+      border: 1px solid #d9d9d9;
+      background: #fafafa;
+      transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+      opacity: 1;
+      margin-right: 8px !important;
+      cursor: pointer;
+      white-space: nowrap;
+      color: #1890ff;
+      background: #e6f7ff;
+      border-color: #91d5ff;
+      font-size: 12px;
+}
+
+.ant-tag-geekblue {
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    line-height: 25px;
+    height: 25px;
+    padding: 0 10px;
+    border-radius: 2px;
+    border: 1px solid #d9d9d9;
+    background: #fafafa;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    opacity: 1;
+    margin-right: 8px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #2f54eb;
+    background: #f0f5ff;
+    border-color: #adc6ff;
+    font-size: 12px;
+}
+
+.ant-tag-orange {
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    line-height: 25px;
+    height: 25px;
+    padding: 0 10px;
+    border-radius: 2px;
+    border: 1px solid #d9d9d9;
+    background: #fafafa;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    opacity: 1;
+    margin-right: 8px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #fa8c16;
+    background: #fff7e6;
+    border-color: #ffd591;
+    font-size: 12px;
+}

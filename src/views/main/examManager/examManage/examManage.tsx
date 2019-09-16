@@ -34,7 +34,7 @@ class ExamManage extends React.Component<Props> {
   }
   componentDidMount() {
     this.getList()
-    console.log( moment().startOf('day'))
+    console.log(moment().startOf('day'))
   }
 
   getList = async () => {
@@ -98,20 +98,24 @@ class ExamManage extends React.Component<Props> {
   handAddExam = async () => {
     let { addExam } = this.props.examManger;
     let { start_time, end_time, number, title, subject_id, exam_id } = this.state;
-    let result = await addExam({
-      "start_time": start_time,
-      "end_time": end_time,
-      "subject_id": subject_id,
-      "exam_id": exam_id,
-      "title": title,
-      "number": number,
-    })
-    if (result.code === 1) {
-      console.log(result)
-      window.localStorage.setItem('content', JSON.stringify(result.data.questions))
-      message.success(result.msg);
-      this.props.history.push('/home/exammanager/addExamList')
+    if (start_time === '' || end_time === '' || number === 0 || title === '' || subject_id === '' || exam_id === '') {
+      message.error('创建试题内容未填写完全,请确认！')
+    } else {
+      let result = await addExam({
+        "start_time": start_time,
+        "end_time": end_time,
+        "subject_id": subject_id,
+        "exam_id": exam_id,
+        "title": title,
+        "number": number,
+      })
+      if (result.code === 1) {
+        window.localStorage.setItem('content', JSON.stringify(result.data.questions))
+        message.success(result.msg);
+        this.props.history.push('/home/exammanager/addExamList')
+      }
     }
+
   }
   render() {
     let { TypeList, classList, startValue, endValue, endOpen, number, title } = this.state;
