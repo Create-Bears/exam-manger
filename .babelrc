@@ -1,11 +1,13 @@
 {
-    "presets": ["react-app"],
     "plugins": [
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
-        ["import", {
-            "libraryName": "antd",
-            "libraryDirectory": "es",
-            "style": "css" // `style: true` 会加载 less 文件
-          }]
-    ]
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": "css"
+            }
+        ]
+    ],
+    "presets": ["react-app"]
 }
