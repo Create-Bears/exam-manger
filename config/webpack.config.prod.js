@@ -47,7 +47,7 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 // To have this structure working with relative paths, we have to use custom options.
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
   ? // Making sure that the publicPath goes back to to build folder.
-    { publicPath: Array(cssFilename.split('/').length).join('../') }
+  { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
 
 // This is the production configuration.
@@ -105,7 +105,7 @@ module.exports = {
       '.jsx',
     ],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -152,7 +152,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               compact: true,
             },
           },
@@ -169,6 +169,14 @@ module.exports = {
                   configFile: paths.appTsProdConfig,
                 },
               },
+              {
+                loader: 'ui-component-loader',
+                options: {
+                  'lib': 'antd',
+                  'camel2': '-',
+                  'style': 'style/css.js',
+                }
+              }
             ],
           },
           // The notation here is somewhat confusing.
@@ -365,7 +373,7 @@ module.exports = {
       minChunks: function (module) {
         // This prevents stylesheet resources with the .css or .scss extension
         // from being moved from their original chunk to the vendor chunk
-        if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+        if (module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
           return false;
         }
         return module.context && module.context.includes('node_modules');

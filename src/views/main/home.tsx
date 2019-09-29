@@ -270,7 +270,7 @@ class HomePage extends React.Component<Props> {
                   <Upload
                     listType="picture-card"
                     name="avatar"
-                    action="http://123.206.55.50:11000/upload"
+                    action="//service.jasonandjay.com/upload"
                     showUploadList={false}
                     beforeUpload={this.beforeUpload}
                     onChange={this.handleChanges}>
